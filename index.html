@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Finance — фінансово-бухгалтерський супровід</title>
+<meta name="description" content="Фінансово-бухгалтерський супровід ФОП і ТОВ: беремо на себе облік і звітність, ви бачите реальні показники бізнесу.">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="top__in wrap">
+    <a class="brand" href="#hero" aria-label="Happy Finance">
+      <span class="brand__mark" aria-hidden="true">
+        <img class="brand__frame" src="img/logo-frame.png" alt="">
+        <img class="brand__h" src="img/logo-h.png" alt="">
+      </span>
+      <img class="brand__word" src="img/logo-word.png" alt="">
+    </a>
+    <nav class="menu" id="menu" aria-label="Головне меню">
+      <a href="#services">Послуги</a>
+      <a href="#about">Про нас</a>
+      <a href="#team">Команда</a>
+      <a href="#quiz">Підібрати пакет</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+    <div class="top__r">
+      <a class="top__tel" href="tel:+380663568040">066-356-80-40</a>
+      <a class="btn btn--sm" href="#lead" data-open="lead">Залишити заявку</a>
+      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <!-- 1. фото: чорно-біла дуотонна версія + кольорова, що відкривається під «променем» -->
+  <div class="photo" id="photo" aria-hidden="true">
+    <img class="photo__bw" src="img/maria-profile.jpg" alt="">
+    <img class="photo__color" src="img/maria-profile.jpg" alt="">
+    <div class="photo__glow"></div>
+  </div>
+  <!-- промінь світла справа: підсвічує край фото -->
+  <div class="rim" aria-hidden="true"></div>
+  <div class="rim rim--l" aria-hidden="true"></div>
+  <!-- 2. сітка, що проявляється в промені -->
+  <div class="grid" aria-hidden="true"></div>
+  <!-- 3. слова, які виходять із хаосу в порядок -->
+  <canvas class="cv" id="cv" aria-hidden="true"></canvas>
+  <div class="shade" aria-hidden="true"></div>
+
+  <div class="hint" id="hint"><i></i><span id="hintTxt">Проведіть курсором — наведіть лад</span></div>
+
+  <div class="hero__bottom wrap">
+    <h1 class="title" id="title"><span class="ln">Управління бізнесом</span><span class="ln">починається з <em>цифр</em></span></h1>
+    <p class="lead">Фінансово-бухгалтерський супровід ФОП&nbsp;і&nbsp;ТОВ. Беремо на&nbsp;себе облік і&nbsp;звітність, а&nbsp;ви&nbsp;бачите реальні показники бізнесу та&nbsp;впевнено приймаєте рішення.</p>
+    <div class="cta">
+      <a class="btn btn--lg" href="#quiz">Підібрати пакет за 1 хвилину</a>
+      <a class="btn btn--ghost btn--lg" href="#lead" data-open="lead">Консультація</a>
+    </div>
+    <!-- TODO клієнтка: підтвердити цифри -->
+    <ul class="hstats" aria-label="Коротко про нас">
+      <li><b data-count="7" data-suffix="+">0</b><span>років досвіду</span></li>
+      <li><b data-count="20" data-suffix="+">0</b><span>ФОП на супроводі</span></li>
+      <li><b data-count="4">0</b><span>галузі бізнесу</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2. ПЕРЕВАГИ: ряд плашок, що трохи заходить на перший екран -->
+<section class="adv" id="advantages" aria-label="Переваги">
+  <div class="adv__bg" aria-hidden="true"><div class="adv__lines"></div><div class="adv__glow"></div></div>
+  <div class="wrap adv__wrap">
+    <ul class="adv__grid">
+      <li class="card rv" data-n="01">
+        <svg class="card__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        <h3>Рішення, а не проблеми</h3>
+        <p>У будь-якій ситуації пропонуємо варіанти. Для нас немає безвихідних запитів.</p>
+      </li>
+      <li class="card rv" style="--d:.08s" data-n="02">
+        <svg class="card__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M22 20H2"/></svg>
+        <h3>Цифри, які показують стан бізнесу</h3>
+        <p>Облік і показники, за якими видно слабкі місця й можна приймати рішення.</p>
+      </li>
+      <li class="card rv" style="--d:.16s" data-n="03">
+        <svg class="card__ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13"/><path d="M9 7V4h6v3M3 13h18"/></svg>
+        <h3>Досвід керівника, а не лише теорія</h3>
+        <p>Консультуємо з практикою управління командою та бізнесом, а не лише законодавством.</p>
+      </li>
+      <li class="card rv" style="--d:.24s" data-n="04">
+        <svg class="card__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        <h3>Облік під ваш бізнес</h3>
+        <p>Підбираємо зручний документообіг, точки контролю й автоматизацію, що економить час команди.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. ЗНАЙОМА СИТУАЦІЯ: оранжевий фон з відео, силуети за склом -->
+<section class="sec pain" id="problems">
+  <video class="pain__video" src="img/Video_orange.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <div class="pain__veil" aria-hidden="true"></div>
+  <div class="wrap pain__in">
+    <div class="pain__head rv">
+      <p class="eyebrow">Знайомі ситуації?</p>
+      <h2 class="h2">Коли бухгалтерія&nbsp;є,<br>а&nbsp;<em>ясності немає</em></h2>
+      <div class="pain__out">
+        <p>Бухгалтерія — це не&nbsp;просто документи, потрібні податковій. Це ваш спокій і&nbsp;безпека зараз і&nbsp;в&nbsp;майбутньому.</p>
+        <a class="btn btn--lg" href="#quiz">Підібрати пакет за 1 хвилину</a>
+      </div>
+    </div>
+    <ol class="pain__list">
+      <li class="rv"><span class="pain__n">01</span><p>Цифри бізнесу з’являються раз на&nbsp;рік, коли треба здавати&nbsp;звіт.</p></li>
+      <li class="rv" style="--d:.08s"><span class="pain__n">02</span><p>Документи розкидані по&nbsp;месенджерах і&nbsp;папках, ніхто не&nbsp;знає, що де&nbsp;лежить.</p></li>
+      <li class="rv" style="--d:.16s"><span class="pain__n">03</span><p>Бухгалтер здає звіти, але на&nbsp;питання «що зараз із&nbsp;бізнесом?» відповіді&nbsp;немає.</p></li>
+      <li class="rv" style="--d:.24s"><span class="pain__n">04</span><p>Лист із&nbsp;податкової лякає, бо&nbsp;невідомо, чи&nbsp;все гаразд в&nbsp;обліку.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4. ПОСЛУГИ -->
+<section class="sec svc" id="services">
+  <div class="wrap">
+    <div class="svc__top">
+    <div class="svc__bg" aria-hidden="true"><img src="img/hands.jpg" alt=""></div>
+    <div class="svc__head">
+      <div class="rv">
+        <p class="eyebrow eyebrow--ink">Послуги</p>
+        <h2 class="h2">Що ми беремо <em>на себе</em></h2>
+      </div>
+      <p class="svc__lead rv" style="--d:.1s">Від першого документа до показників, за якими видно стан бізнесу. Кожен напрямок налаштовуємо під ваш бізнес, а&nbsp;не&nbsp;навпаки.</p>
+    </div>
+
+    <div class="svc__grid">
+      <article class="svc-card rv" tabindex="0">
+        <span class="svc-card__n">01</span>
+        <svg class="svc-card__ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <h3>Бухгалтерський супровід ФОП і ТОВ</h3>
+        <p>Облік, звітність і податки під вашу систему оподаткування.</p>
+      </article>
+      <article class="svc-card rv" style="--d:.06s" tabindex="0">
+        <span class="svc-card__n">02</span>
+        <svg class="svc-card__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 10l6-6 6 6M5 20h14"/></svg>
+        <h3>Реєстрація та закриття бізнесу</h3>
+        <p>Відкриваємо й закриваємо ФОП і ТОВ без зайвих кроків.</p>
+      </article>
+      <article class="svc-card rv" style="--d:.12s" tabindex="0">
+        <span class="svc-card__n">03</span>
+        <svg class="svc-card__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-4 3.2-6 6.5-6s5.9 2 6.5 6M16 5a3.5 3.5 0 010 7M18 14c2 .6 3.2 2.6 3.500 6"/></svg>
+        <h3>Кадровий облік і зарплата</h3>
+        <p>Кадрові документи, табелі, нарахування та виплати.</p>
+      </article>
+      <article class="svc-card rv" style="--d:.18s" tabindex="0">
+        <span class="svc-card__n">04</span>
+        <svg class="svc-card__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M22 20H2"/></svg>
+        <h3>Фінансовий та управлінський облік</h3>
+        <p>P&amp;L, Cash Flow, Balance: цифри, за якими приймають рішення.</p>
+      </article>
+      <article class="svc-card rv" style="--d:.24s" tabindex="0">
+        <span class="svc-card__n">05</span>
+        <svg class="svc-card__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        <h3>Бізнес-процеси й автоматизація</h3>
+        <p>Знаходимо вузькі місця й налаштовуємо документообіг.</p>
+      </article>
+      <article class="svc-card rv" style="--d:.3s" tabindex="0">
+        <span class="svc-card__n">06</span>
+        <svg class="svc-card__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg>
+        <h3>Фінансовий моніторинг і спеціальні запити</h3>
+        <p>Нестандартні ситуації розбираємо й шукаємо варіанти.</p>
+      </article>
+    </div>
+    </div>
+
+    <div class="scope gg rv">
+      <div class="gg__bg" aria-hidden="true"><div class="gg__lines"></div><div class="gg__glow"></div></div>
+      <div class="scope__side">
+        <span class="scope__label">Що входить у супровід</span>
+        <div class="seg" id="seg" role="tablist" aria-label="Для кого">
+          <i class="seg__thumb" aria-hidden="true"></i>
+          <button type="button" role="tab" aria-selected="true" data-t="fop">ФОП</button>
+          <button type="button" role="tab" aria-selected="false" data-t="tov">ТОВ</button>
+        </div>
+        <div class="scope__menu" id="scopeMenu" role="tablist" aria-orientation="vertical" aria-label="Послуги"></div>
+      </div>
+      <div class="scope__detail" id="scopeDetail" role="tabpanel" aria-live="polite"></div>
+      <!-- фігура з вирізаним фоном: файл img/maria-2.png; без файлу блок виглядає як раніше -->
+      <div class="scope__fig" aria-hidden="true"><img src="img/maria-2.png" alt="" onload="this.closest('.scope').classList.add('has-fig')" onerror="this.parentElement.remove()"></div>
+    </div>
+  </div>
+  <i class="tab t28" style="--tc:var(--paper)" aria-hidden="true"></i>
+</section>
+
+<!-- 5. БУХГАЛТЕРІЯ — БІЛЬШЕ, НІЖ ЗВІТНІСТЬ -->
+<section class="sec mani gg gg--text" id="about" data-x0=".4">
+  <div class="gg__bg" aria-hidden="true"><div class="gg__lines"></div><div class="gg__glow"></div></div>
+  <img class="mani__mark" src="img/logo-frame.png" alt="" aria-hidden="true">
+  <div class="wrap mani__in">
+    <div class="mani__fig rv" aria-hidden="true"><img src="img/maria-3-flip.png" alt=""></div>
+    <div class="mani__txt">
+      <p class="eyebrow rv">Бухгалтерія — більше, ніж звітність</p>
+      <!-- TODO клієнтка: підтвердити цитату (взято з її тексту про підхід) -->
+      <blockquote class="mani__q">
+        <p class="mani__big" id="maniBig">«Без цифр управління бізнесом — це не управління, а ілюзія.»</p>
+        <footer class="mani__by rv"><b>Марія Панченко</b><span>засновниця Happy Finance</span></footer>
+      </blockquote>
+      <ol class="flow3">
+        <li class="rv"><i class="f3n" aria-hidden="true">01</i><b>Цифри</b><span>показують реальний стан бізнесу</span></li>
+        <li class="rv" style="--d:.12s"><i class="f3n" aria-hidden="true">02</i><b>Документообіг</b><span>дає контроль над процесами</span></li>
+        <li class="rv" style="--d:.24s"><i class="f3n" aria-hidden="true">03</i><b>Управлінський облік</b><span>веде до обґрунтованих рішень</span></li>
+      </ol>
+    </div>
+  </div>
+  <i class="tab t72" style="--tc:var(--navy)" aria-hidden="true"></i>
+</section>
+
+<!-- 6. ЯК МИ ПРАЦЮЄМО -->
+<section class="sec flow" id="process">
+  <div class="wrap flow__in">
+    <div class="flow__head">
+      <div class="rv">
+        <p class="eyebrow eyebrow--ink">Як ми працюємо</p>
+        <h2 class="h2">Від аналізу <em>до контролю</em> показників</h2>
+        <p class="flow__lead">Спочатку розбираємось, як працює ваш бізнес. Лише потім будуємо облік.</p>
+      </div>
+      <!-- «об'єктив»: фото різкішає разом із кроками — від розмитого до чіткого -->
+      <figure class="lens rv" style="--d:.12s" aria-hidden="true">
+        <div class="lens__frame">
+          <img src="img/maria-eye.jpg" alt="">
+          <i class="lens__grid"></i>
+          <i class="lens__scan"></i>
+          <i class="lens__ring"></i>
+          <i class="lens__c lens__c--tl"></i><i class="lens__c lens__c--tr"></i><i class="lens__c lens__c--bl"></i><i class="lens__c lens__c--br"></i>
+        </div>
+        <figcaption class="lens__cap"><i></i><span id="lensTag">Аналіз</span></figcaption>
+      </figure>
+    </div>
+    <div class="flow__right">
+      <ol class="flow__list" id="flowList">
+        <li class="step" data-tag="Аналіз"><span class="step__n">1</span><div><h3>Аналізуємо бізнес і поточні процеси</h3><p>Дивимось, як усе працює зараз, а не як мало б працювати.</p></div></li>
+        <li class="step" data-tag="Потреби"><span class="step__n">2</span><div><h3>Визначаємо проблемні місця та потреби</h3><p>Знаходимо вузькі місця й напрямки, де можна полегшити роботу.</p></div></li>
+        <li class="step" data-tag="Точки контролю"><span class="step__n">3</span><div><h3>Підбираємо формат обліку й точки контролю</h3><p>Розподіляємо відповідальність і контроль під ваш бізнес і власника.</p></div></li>
+        <li class="step" data-tag="Автоматизація"><span class="step__n">4</span><div><h3>Налаштовуємо документообіг та автоматизацію</h3><p>Зручний обмін документами й менше рутини для вашої команди.</p></div></li>
+        <li class="step" data-tag="Показники"><span class="step__n">5</span><div><h3>Забезпечуємо супровід і контроль показників</h3><p>Ведемо облік і звітність та показуємо цифри, на які можна спиратись у рішеннях.</p></div></li>
+      </ol>
+      <i class="flow__dot" aria-hidden="true"></i>
+    </div>
+  </div>
+  <i class="tab t34" style="--tc:var(--paper)" aria-hidden="true"></i>
+</section>
+
+<!-- 7. ГРА «ЗВЕДИ БАЛАНС» -->
+<section class="sec game gg" id="game">
+  <div class="gg__bg" aria-hidden="true"><div class="gg__lines"></div><div class="gg__glow"></div></div>
+  <div class="wrap game__in">
+    <div class="game__intro rv">
+      <div class="game__fig" id="gFig" aria-hidden="true"><img src="img/maria-4-fade.png" alt=""></div>
+      <p class="eyebrow">Перерва на хвилину</p>
+      <h2 class="h2">Зведи <em>баланс</em></h2>
+      <p class="game__lead">Операції падають, а ви розкладаєте їх по місцях: надходження, витрати чи податки. Так виглядає порядок в обліку, коли за ним стежить фахівець.</p>
+      <ul class="game__hud">
+        <li><span>Рахунок</span><b><i id="gScore">0</i>/15</b></li>
+        <li><span>Життя</span><b class="lives" id="gLives" aria-label="Життя"><i></i><i></i><i></i></b></li>
+      </ul>
+      <p class="game__keys">На комп’ютері: клавіші <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></p>
+    </div>
+    <div class="game__box rv" style="--d:.1s">
+      <div class="lane" id="lane">
+        <div class="lane__grid" aria-hidden="true"></div>
+        <div class="op" id="op" hidden><span class="op__t"></span><b class="op__a"></b></div>
+        <div class="lane__floor" aria-hidden="true"><span>Баланс</span></div>
+        <div class="game__screen on" id="gScreen"></div>
+      </div>
+      <div class="game__btns" id="gBtns">
+        <button type="button" data-c="income"><kbd>1</kbd>Надходження</button>
+        <button type="button" data-c="expense"><kbd>2</kbd>Витрати</button>
+        <button type="button" data-c="tax"><kbd>3</kbd>Податки</button>
+      </div>
+      <p class="sr-only" id="gLive" aria-live="polite"></p>
+    </div>
+  </div>
+  <i class="tab t66" style="--tc:var(--navy)" aria-hidden="true"></i>
+</section>
+
+<!-- 8. ПІДІБРАТИ ПАКЕТ (квіз) -->
+<section class="sec quiz" id="quiz">
+  <div class="wrap quiz__in">
+    <div class="quiz__head rv">
+      <p class="eyebrow eyebrow--navy">Підібрати пакет</p>
+      <h2 class="h2">Підберемо формат <em>за 1 хвилину</em></h2>
+      <p class="quiz__lead">Чотири питання, і ви побачите, з чого складається супровід саме для вашого бізнесу. Далі напишіть нам у Telegram: повідомлення вже буде готове.</p>
+    </div>
+    <div class="quiz__card rv" style="--d:.1s" id="quizCard">
+      <img class="quiz__pen" src="img/pen1.png" alt="" aria-hidden="true">
+      <div class="quiz__top"><span id="qStep">Питання 1 з 4</span><div class="quiz__bar"><i id="qBar"></i></div></div>
+      <div class="quiz__body" id="qBody"></div>
+      <button class="quiz__back" id="qBack" type="button">← Назад</button>
+    </div>
+  </div>
+  <i class="tab t72" style="--tc:var(--sand)" aria-hidden="true"></i>
+</section>
+
+<!-- 9. МАРІЯ ТА РЕЗУЛЬТАТИ -->
+<section class="sec founder gg after-tab" id="founder">
+  <div class="gg__bg" aria-hidden="true"><div class="gg__lines"></div><div class="gg__glow"></div></div>
+  <div class="wrap founder__in">
+    <figure class="founder__ph rv">
+      <img src="img/maria-portrait-web.jpg" alt="Марія Панченко, засновниця Happy Finance">
+      <figcaption><b>Марія Панченко</b><span>засновниця Happy Finance</span></figcaption>
+    </figure>
+    <div class="founder__txt">
+      <p class="eyebrow rv">Засновниця</p>
+      <h2 class="h2">Фінанси як <em>інструмент керування</em></h2>
+      <p class="founder__lead rv">Мій шлях у бізнесі розпочався з бухгалтерського обліку й привів до фінансового та операційного управління, керівництва підприємствами й антикризового менеджменту. Для мене фінанси — це не просто звіти, податки й цифри. Це інструмент, який допомагає власнику розуміти реальний стан підприємства й ухвалювати обґрунтовані рішення.</p>
+      <!-- TODO клієнтка: підтвердити результати (взято з її біо) -->
+      <ul class="stats3">
+        <li class="rv"><b data-to="4" data-prefix="×">×0</b><span>зростання товарообігу підприємства</span></li>
+        <li class="rv" style="--d:.1s"><b class="pm" aria-label="зі збитків у прибуток"><i>−</i><u></u><i>+</i></b><span>бізнес виведено зі збитків у прибуток</span></li>
+        <li class="rv" style="--d:.2s"><b data-to="300" data-prefix="~">~0</b><span>працівників у штаті підприємства під керівництвом</span></li>
+      </ul>
+      <ul class="chips rv" aria-label="Галузі досвіду">
+        <li>Ресторанний бізнес</li><li>Виробництво</li><li>Дистрибуція</li><li>Роздрібна торгівля</li><li>Консалтинг</li>
+      </ul>
+      <a class="btn btn--lg rv" href="#lead" data-open="lead">Обговорити ваш бізнес</a>
+    </div>
+  </div>
+  <i class="tab t34" style="--tc:var(--navy)" aria-hidden="true"></i>
+</section>
+
+<!-- 10. КОМАНДА -->
+<section class="sec team after-tab" id="team">
+  <div class="wrap">
+    <div class="team__head">
+      <div class="rv">
+        <p class="eyebrow eyebrow--ink">Команда</p>
+        <h2 class="h2">Фахівці, які ведуть <em>ваш облік</em></h2>
+      </div>
+      <p class="team__lead rv" style="--d:.1s">Команда має досвід у різних напрямках, тому ви отримуєте комплексний супровід, а не набір окремих послуг. Вихідні в нас вихідні: так ми зберігаємо якість і терміни.</p>
+    </div>
+    <ul class="team__grid">
+      <li class="tcard rv" data-tab="01">
+        <figure class="tcard__ph" style="--img:url(img/team-evgenia.jpg)"><img src="img/team-evgenia.jpg" alt="Євгенія Мазепа"><span class="tcard__stamp">Головний бухгалтер</span></figure>
+        <h3>Євгенія Мазепа</h3>
+        <p>Веде облік від первинних документів до звітності. Досвід у торгівлі, будівництві та на посаді фінансового директора.</p>
+      </li>
+      <li class="tcard rv" style="--d:.08s" data-tab="02">
+        <figure class="tcard__ph" style="--img:url(img/team-karyna.jpg)"><img src="img/team-karyna.jpg" alt="Карина Омельченко"><span class="tcard__stamp">Первинні документи · ПРРО</span></figure>
+        <h3>Карина Омельченко</h3>
+        <p>Відповідає за щоденні операції: первинні документи та роботу з ПРРО, щоб в обліку не було прогалин.</p>
+      </li>
+      <li class="tcard rv" style="--d:.16s" data-tab="03">
+        <!-- TODO клієнтка: додати фото Юлії -->
+        <figure class="tcard__ph tcard__mono"><span class="tcard__ini" aria-hidden="true">ЮА</span><span class="tcard__stamp">Зарплата</span></figure>
+        <h3>Юлія Авер’янова</h3>
+        <p>Понад 20 років у бухгалтерії. Відповідає за нарахування зарплати та кадрові розрахунки.</p>
+      </li>
+      <li class="tcard rv" style="--d:.24s" data-tab="04">
+        <!-- TODO клієнтка: додати фото Надії -->
+        <figure class="tcard__ph tcard__mono"><span class="tcard__ini" aria-hidden="true">НГ</span><span class="tcard__stamp">Закупівлі · первинні документи</span></figure>
+        <h3>Надія Гончаренко</h3>
+        <p>Керувала відділом обліку первинних документів (13 людей у трьох філіях) і закупівлями. Знає, як будуються процеси.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11. ВІДГУКИ ТА КЕЙСИ: прихований слот. Вмикається (прибрати hidden), коли будуть реальні відгуки й кейси клієнтки -->
+<section class="sec reviews" id="reviews" hidden aria-label="Відгуки">
+  <!-- TODO клієнтка: 2–3 відгуки з підтвердженням, логотипи клієнтів, кейси «було → стало» -->
+</section>
+
+<!-- 12. FAQ -->
+<section class="sec faq gg after-tab" id="faq">
+  <div class="gg__bg" aria-hidden="true"><div class="gg__lines"></div><div class="gg__glow"></div></div>
+  <i class="tab tab--top t66" style="--tc:var(--paper)" aria-hidden="true"></i>
+  <div class="wrap faq__in">
+    <div class="faq__head rv">
+      <div class="faq__fig" aria-hidden="true"><img src="img/maria-6-bust-fade.png" alt=""></div>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="h2">Питання, які ставлять <em>найчастіше</em></h2>
+      <p class="faq__lead">Не знайшли відповіді? Напишіть нам, і ми розберемо саме вашу ситуацію.</p>
+      <a class="btn btn--ghost btn--lg" href="https://t.me/MariiaPanchenko_ua" target="_blank" rel="noopener">Написати в Telegram</a>
+    </div>
+    <div class="faq__list" id="faqList">
+      <div class="qa rv open"><button class="qa__q" type="button" aria-expanded="true"><span>Як передати облік від іншого бухгалтера?</span><i aria-hidden="true"></i></button><div class="qa__a"><div><p>Спершу аналізуємо чинний облік і документи, узгоджуємо порядок передачі та терміни. Після цього беремо облік і звітність на себе.</p></div></div></div>
+      <div class="qa rv" style="--d:.05s"><button class="qa__q" type="button" aria-expanded="false"><span>Що буде, якщо облік уже запущений?</span><i aria-hidden="true"></i></button><div class="qa__a"><div><p>Проводимо ревізію: знаходимо слабкі місця, недоліки й порушення та пропонуємо план виправлення. Ви бачите, що саме потрібно змінити.</p></div></div></div>
+      <div class="qa rv" style="--d:.1s"><button class="qa__q" type="button" aria-expanded="false"><span>Як ви допомагаєте під час перевірок?</span><i aria-hidden="true"></i></button><div class="qa__a"><div><p>Допомагаємо підготувати документи, звірки й пояснення, супроводжуємо під час перевірки та шукаємо варіанти рішення у спірних ситуаціях.</p></div></div></div>
+      <div class="qa rv" style="--d:.15s"><button class="qa__q" type="button" aria-expanded="false"><span>Як ми спілкуємось і передаємо документи?</span><i aria-hidden="true"></i></button><div class="qa__a"><div><p>Підбираємо зручний документообіг під ваш бізнес: узгоджуємо канали, порядок обміну й точки контролю, щоб усе було видно й нічого не губилось.</p></div></div></div>
+      <div class="qa rv" style="--d:.2s"><button class="qa__q" type="button" aria-expanded="false"><span>У який час ви працюєте?</span><i aria-hidden="true"></i></button><div class="qa__a"><div><p>У будні, у робочий час. Команда не працює у вихідні та після 17:00: це наш спосіб зберігати якість і терміни. Рідкісні винятки обговорюємо заздалегідь.</p></div></div></div>
+      <div class="qa rv" style="--d:.25s"><button class="qa__q" type="button" aria-expanded="false"><span>Скільки це коштує?</span><i aria-hidden="true"></i></button><div class="qa__a"><div><p>Вартість залежить від форми бізнесу, системи оподаткування, кількості операцій і працівників. Пройдіть підбір пакета за хвилину або залиште заявку, і ми підготуємо пропозицію під ваш запит.</p></div></div></div>
+    </div>
+  </div>
+  <i class="tab t28" style="--tc:var(--navy)" aria-hidden="true"></i>
+</section>
+
+<!-- 13. ФІНАЛЬНИЙ ЗАКЛИК + ФОРМА -->
+<section class="sec ctaf gg after-tab" id="contacts">
+  <div class="gg__bg" aria-hidden="true"><div class="gg__lines"></div><div class="gg__glow"></div></div>
+  <div class="wrap cta__in">
+    <div class="cta__txt">
+      <h2 class="h2">Розберімося, що потрібно <em>саме вашому бізнесу</em></h2>
+      <p class="cta__lead rv">Залиште контакти, і ми зв’яжемося з вами. Можна також одразу зателефонувати чи написати в Telegram.</p>
+      <ul class="cta__links rv">
+        <li><span>Телефон</span><a href="tel:+380663568040">066-356-80-40</a></li>
+        <li><span>Telegram</span><a href="https://t.me/MariiaPanchenko_ua" target="_blank" rel="noopener">@MariiaPanchenko_ua</a></li>
+        <li><span>Графік</span><b>Пн–Пт, у робочий час</b></li>
+      </ul>
+    </div>
+    <form class="cta__form rv" id="ctaForm" style="--d:.1s" novalidate>
+      <h3>Залишити заявку</h3>
+      <label>Ім’я<input name="name" type="text" autocomplete="name" required></label>
+      <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+380" required></label>
+      <label>Коротко про бізнес <small>(необов’язково)</small><textarea name="note" rows="3"></textarea></label>
+      <p class="modal__err" id="ctaErr" hidden>Вкажіть ім’я та телефон повністю.</p>
+      <button class="btn btn--lg" type="submit">Надіслати заявку</button>
+      <div class="modal__ok" id="ctaOk" hidden><b>Дякуємо!</b><span>Заявку отримано. Ми зв’яжемося з вами.</span></div>
+    </form>
+  </div>
+  <i class="tab t72" style="--tc:var(--orange)" aria-hidden="true"></i>
+</section>
+
+<!-- 14. ФУТЕР -->
+<footer class="foot after-tab" id="footer">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="brand brand--static" href="#hero" aria-label="Happy Finance">
+        <span class="brand__mark" aria-hidden="true"><img src="img/logo-frame.png" alt=""><img src="img/logo-h.png" alt=""></span>
+        <img class="brand__word" src="img/logo-word.png" alt="">
+      </a>
+      <p>Фінансово-бухгалтерський супровід ФОП і ТОВ.</p>
+    </div>
+    <nav class="foot__nav" aria-label="Розділи">
+      <a href="#services">Послуги</a><a href="#about">Про нас</a><a href="#team">Команда</a><a href="#quiz">Підібрати пакет</a><a href="#faq">FAQ</a><a href="#contacts">Контакти</a>
+    </nav>
+    <ul class="foot__contacts">
+      <li><a href="tel:+380663568040">066-356-80-40</a></li>
+      <li><a href="https://t.me/MariiaPanchenko_ua" target="_blank" rel="noopener">Telegram</a></li>
+      <li><a href="https://instagram.com/Mariia_Panchenko_ua" target="_blank" rel="noopener">Instagram</a></li>
+      <li>Пн–Пт, у робочий час</li>
+    </ul>
+  </div>
+  <div class="wrap foot__bar">
+    <span>© 2026 Happy Finance</span>
+    <a href="#privacy" data-open="privacy">Політика конфіденційності</a>
+  </div>
+</footer>
+
+<!-- Політика конфіденційності: заглушка, TODO клієнтка -->
+<div class="modal" id="privacy" role="dialog" aria-modal="true" aria-labelledby="privT" hidden>
+  <div class="modal__bg" data-close></div>
+  <div class="modal__card">
+    <button type="button" class="modal__x" data-close aria-label="Закрити">×</button>
+    <h3 id="privT">Політика конфіденційності</h3>
+    <p class="modal__sub">Повний текст політики конфіденційності буде додано перед запуском сайту. Контакти, які ви залишаєте у формі, використовуються лише для зв’язку з вами.</p>
+  </div>
+</div>
+
+
+<!-- ЗАЯВКА: спливаюче вікно (поки без відправки, TODO підключити до Telegram/CRM) -->
+<div class="modal" id="lead" role="dialog" aria-modal="true" aria-labelledby="leadT" hidden>
+  <div class="modal__bg" data-close></div>
+  <form class="modal__card" id="leadForm" novalidate>
+    <button type="button" class="modal__x" data-close aria-label="Закрити">×</button>
+    <h3 id="leadT">Залишити заявку</h3>
+    <p class="modal__sub">Залиште контакти, і ми зв’яжемося з вами. Або напишіть нам у Telegram.</p>
+    <p class="modal__svc" id="leadSvc" hidden></p>
+    <label>Ім’я<input name="name" type="text" autocomplete="name" required></label>
+    <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+380" required></label>
+    <p class="modal__err" id="leadErr" hidden>Вкажіть ім’я та телефон повністю.</p>
+    <button class="btn btn--lg" type="submit">Надіслати</button>
+    <a class="modal__tg" href="https://t.me/MariiaPanchenko_ua" target="_blank" rel="noopener">Або напишіть у Telegram</a>
+    <div class="modal__ok" id="leadOk" hidden><b>Дякуємо!</b><span>Заявку отримано. Ми зв’яжемося з вами.</span></div>
+  </form>
+</div>
+
+<!-- Розгорнутий профіль члена команди: висувна панель. TODO клієнтка: підтвердити тексти біо з кожною людиною -->
+<div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="drName">
+  <div class="drawer__bg" data-dclose></div>
+  <aside class="drawer__panel">
+    <button class="drawer__x" type="button" data-dclose aria-label="Закрити">×</button>
+    <div class="drawer__top" id="drTop"></div>
+    <div class="drawer__body" id="drBody">
+      <p class="drawer__tag" id="drTag"></p>
+      <h3 id="drName"></h3>
+      <p class="drawer__role" id="drRole"></p>
+      <p class="drawer__lead" id="drLead"></p>
+      <h4>Шлях</h4>
+      <ol class="tl" id="drPath"></ol>
+      <h4>Напрямки</h4>
+      <ul class="chips" id="drTags"></ul>
+    </div>
+    <div class="drawer__foot">
+      <div class="drawer__nav"><button type="button" id="drPrev" aria-label="Попередній фахівець">←</button><button type="button" id="drNext" aria-label="Наступний фахівець">→</button></div>
+      <a class="btn btn--lg" href="#lead" data-open="lead">Залишити заявку</a>
+    </div>
+  </aside>
+</div>
+
+<script src="script.js"></script>
+<nav class="fab" id="fab" aria-label="Швидкий зв'язок">
+  <a class="fab__b fab__b--tg" href="https://t.me/MariiaPanchenko_ua" target="_blank" rel="noopener" aria-label="Написати в Telegram">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4 3 11l5.5 2L10 19l3-3.5 4.5 3.3L21 4Z"/><path d="m8.5 13 8-5.5"/></svg><span>Telegram</span>
+  </a>
+  <a class="fab__b fab__b--tel" href="tel:+380663568040" aria-label="Зателефонувати">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg><span>066-356-80-40</span>
+  </a>
+</nav></body>
+</html>
