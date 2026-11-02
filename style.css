@@ -1312,3 +1312,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .mani__fig{translate:0 -78px}
 }
 @media (max-width:1000px){.mani__fig{translate:0 -50px}}
+
+/* ---------- Телефон: менші відступи навколо гри й квізу ---------- */
+@media (max-width:1000px){
+  .game{padding-bottom:clamp(44px,10vw,60px)}
+  .quiz{padding-top:clamp(52px,12vw,68px);padding-bottom:clamp(48px,10vw,60px)}
+}
