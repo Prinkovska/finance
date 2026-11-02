@@ -52,7 +52,7 @@ function resize() {
   mob = W < 700;
   // на телефоні слова живуть у вільній зоні над заголовком і на всю ширину
   YM = mob ? Math.max(TOP + 140, $('#title').getBoundingClientRect().top - hero.getBoundingClientRect().top - 12) : H;
-  XM = mob ? W - 8 : Math.max(photo.offsetLeft + photo.offsetWidth * .2, W * .3);   // права межа: слова не заходять на фото
+  XM = mob ? W * .6 : Math.max(photo.offsetLeft + photo.offsetWidth * .2, W * .3);   // права межа: слова не заходять на фото
   const n = mob ? Math.max(14, Math.min(26, Math.round(W * (YM - TOP) / 9000))) : Math.max(24, Math.min(80, Math.round(XM * H / 9000)));
   tokens = Array.from({ length: n }, (_, i) => ({
     x: Math.random() * XM, y: TOP + Math.random() * (YM - TOP),
@@ -66,7 +66,7 @@ function resize() {
 
 // точка просто перед обличчям (воно дивиться ліворуч)
 function faceFront() {
-  if (mob) return { x: W * .5, y: (TOP + YM) / 2 };
+  if (mob) return { x: XM * .5, y: (TOP + YM) / 2 };
   return { x: XM - W * .14, y: H * .3 };
 }
 
@@ -85,7 +85,7 @@ function frame(t) {
   // якщо користувач не рухає курсором — промінь сам «гуляє»
   if (t - lastMove > 3500) {
     const f = faceFront();
-    tgt.x = f.x + Math.cos(t / 1700) * W * (mob ? .3 : .13);
+    tgt.x = f.x + Math.cos(t / 1700) * (mob ? XM * .3 : W * .13);
     tgt.y = f.y + Math.sin(t / 1100) * (mob ? (YM - TOP) * .28 : H * .12);
   }
   cur.x += (tgt.x - cur.x) * .12; cur.y += (tgt.y - cur.y) * .12;
@@ -106,7 +106,7 @@ function draw() {
   for (const k of tokens) {
     const d = Math.hypot(k.x - cur.x, k.y - cur.y);
     const want = Math.max(0, Math.min(1, (1 - d / R) * 1.7));
-    k.s += (want - k.s) * .14;
+    k.s += ((reduced ? 1 : want) - k.s) * .14;
     const move = reduced ? 0 : 1 - k.s;           // у промені слова завмирають і вишиковуються
     k.x += k.vx * move; k.y += k.vy * move;
     if (k.x < -60) k.x = XM; if (k.x > XM) k.x = -60;
@@ -135,7 +135,7 @@ addEventListener('resize', resize);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);   // після завантаження шрифтів перерахувати зону слів
 addEventListener('load', resize);
 resize();
-if (reduced) { const f = faceFront(); cur.x = f.x; cur.y = f.y; hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px'); draw(); }
+if (reduced) { tokens.forEach(k => { k.s = 1; }); const f = faceFront(); cur.x = f.x; cur.y = f.y; hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px'); draw(); }
 else { raf = 1; requestAnimationFrame(frame); }
 
 /* ---------- поява блоків при скролі ---------- */

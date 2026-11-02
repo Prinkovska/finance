@@ -1166,3 +1166,14 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 92%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 50%,transparent 76%);
     mask-image:linear-gradient(90deg,transparent,#000 16%,#000 92%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 50%,transparent 76%)}
 }
+/* ---------- Телефон: текст першого екрана нижче, плашки компактніші ---------- */
+@media (max-width:640px){
+  .hero__bottom{padding-bottom:18px}
+  .hstats{margin-top:18px;gap:6px}
+  .hstats li{padding:8px 10px 9px}
+  .hstats b{font-size:1.2rem;margin-bottom:3px}
+  .hstats span{font-size:.66rem;line-height:1.2}
+  .cta{gap:10px}
+  .cta .btn{padding:14px 20px}
+  .lead{margin-bottom:16px}
+}
