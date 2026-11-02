@@ -1189,3 +1189,20 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .pain__list{order:1}
   .pain__out{order:2;margin-top:6px;max-width:none}
 }
+/* ---------- Телефон: компактні картки «Послуг» і Марія над панеллю ---------- */
+@media (max-width:640px){
+  .svc__grid{gap:10px}
+  .svc .svc-card{display:grid;grid-template-columns:30px 1fr;column-gap:14px;align-items:start;min-height:0;padding:16px 16px 18px}
+  .svc .svc-card .svc-card__ico{grid-row:1/3;width:26px;height:26px;margin:2px 0 0}
+  .svc .svc-card h3{font-size:.95rem;margin:0 0 6px;padding-right:48px}
+  .svc .svc-card p{font-size:.86rem;line-height:1.42}
+  .svc .svc-card__n{font-size:2.4rem;right:12px;top:8px}
+}
+@media (max-width:900px){
+  .scope.has-fig{margin-top:clamp(150px,34vw,230px)}
+  .scope.has-fig .scope__fig{display:block;right:8px;bottom:calc(100% - 22px);height:clamp(220px,52vw,330px)}
+  .scope.has-fig::before{display:block;width:70%;height:55%;top:-14%;bottom:auto}
+}@media (max-width:900px){
+  .scope.has-fig{--mf:clamp(220px,52vw,330px);margin-top:calc(var(--mf) - 4px)}
+  .scope.has-fig .scope__fig{height:var(--mf)}
+}
