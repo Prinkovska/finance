@@ -1300,3 +1300,15 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .mani__big{margin-top:-34px}
 }
 @media (max-width:1000px){.mani__fig{translate:0 -88px}.mani__big{margin-top:-8px}}
+
+/* ---------- Телефон: шар «Марія» над виїмкою (виїмку малює сам блок), Марія нижче ---------- */
+.tab--m{display:none}
+@media (max-width:1000px){
+  #about{z-index:31}
+  #services>.tab{display:none}
+  .tab--m{display:block}
+  .mani .tab{z-index:3}
+  .mani>.tab--m{z-index:1}
+  .mani__fig{translate:0 -78px}
+}
+@media (max-width:1000px){.mani__fig{translate:0 -50px}}
