@@ -1212,3 +1212,11 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .scope__menu button::after{content:"+";position:absolute;right:6px;top:50%;translate:0 -50%;width:28px;height:28px;display:grid;place-items:center;border:1.5px solid var(--orange);border-radius:50%;color:var(--orange);font-family:var(--f-head);font-weight:600;font-size:1.15rem;line-height:1;opacity:.9;transition:background .25s,color .25s,transform .3s}
   .scope__menu button[aria-selected=true]::after{content:"−";background:var(--orange);color:#fff}
 }
+/* ---------- Телефон: заголовок панелі у 2 рядки, Марія «стоїть» у вільному місці справа ---------- */
+.mbr{display:none}
+@media (max-width:900px){
+  .mbr{display:inline}
+  .scope.has-fig{--depth:100px;margin-top:calc(var(--mf) - var(--depth) + 18px)}
+  .scope.has-fig .scope__fig{bottom:calc(100% - var(--depth))}
+  .scope.has-fig .scope__fig img{-webkit-mask-image:linear-gradient(180deg,#000 58%,transparent 100%);mask-image:linear-gradient(180deg,#000 58%,transparent 100%)}
+}
