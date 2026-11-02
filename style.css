@@ -1177,3 +1177,8 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .cta .btn{padding:14px 20px}
   .lead{margin-bottom:16px}
 }
+/* ---------- Телефон: фото трохи нижче, сітка лише зліва (не за жінкою) ---------- */
+@media (max-width:640px){
+  .photo{translate:0 -66px}
+  .grid{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 42%,transparent 62%);mask-image:linear-gradient(90deg,#000 0,#000 42%,transparent 62%)}
+}
