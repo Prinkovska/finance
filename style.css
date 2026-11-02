@@ -1318,3 +1318,8 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .game{padding-bottom:clamp(44px,10vw,60px)}
   .quiz{padding-top:clamp(52px,12vw,68px);padding-bottom:clamp(48px,10vw,60px)}
 }
+/* ---------- Телефон: Марія більша й ближче до цитати ---------- */
+@media (max-width:1000px){
+  .mani__in{grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr)}
+  .mani__big{margin-top:-30px}
+}
