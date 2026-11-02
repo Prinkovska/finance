@@ -770,3 +770,16 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
   const chk = () => f.classList.toggle('on', hero.getBoundingClientRect().bottom < innerHeight * .4);
   addEventListener('scroll', chk, { passive: true }); addEventListener('resize', chk); chk();
 })();
+/* ---------- «Як ми працюємо»: на телефоні фото-«об'єктив» липне зверху й різкішає разом із кроками ---------- */
+(() => {
+  const lens = document.querySelector('.lens'), head = document.querySelector('.flow__head'),
+    right = document.querySelector('.flow__right'), list = document.getElementById('flowList'), dot = document.querySelector('.flow__dot');
+  if (!lens || !head || !right || !list || !dot) return;
+  const mq = matchMedia('(max-width:1000px)');
+  const place = () => {
+    if (mq.matches) { right.prepend(lens); list.append(dot); }
+    else { head.append(lens); right.append(dot); }
+  };
+  mq.addEventListener ? mq.addEventListener('change', place) : mq.addListener(place);
+  place();
+})();

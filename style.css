@@ -1253,3 +1253,11 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .flow3 li:last-child{border-bottom-color:rgba(255,255,255,.18)}
 }
 @media (max-width:1000px){.mani__big{margin-top:30px}}
+
+/* ---------- Телефон: фото «Аналіз» залишається зверху, поки йдуть кроки ---------- */
+@media (max-width:1000px){
+  .flow__right .lens{position:sticky;top:76px;z-index:6;margin:0 0 20px;padding:10px 0 12px;background:var(--paper);--lh:140px}
+  .flow__right .lens__frame{width:100%;height:var(--lh)}
+  .flow__right .lens__cap{margin-top:10px}
+  .flow__right .lens::after{content:"";position:absolute;left:0;right:0;top:100%;height:18px;background:linear-gradient(var(--paper),transparent);pointer-events:none}
+}
