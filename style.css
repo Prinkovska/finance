@@ -1236,3 +1236,20 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .scope.has-fig .scope__fig{right:-12px;filter:drop-shadow(12px 0 18px rgba(251,104,53,.5)) drop-shadow(-8px 0 24px rgba(70,110,255,.38))}
   .scope.has-fig .scope__fig img{filter:brightness(1.1) contrast(1.06)}
 }
+/* ---------- Телефон і планшет: «Бухгалтерія — більше, ніж звітність» (фото й підпис у рядок, цитата на всю ширину) ---------- */
+@media (max-width:1000px){
+  .mani{padding-top:clamp(36px,8vw,56px);padding-bottom:clamp(64px,14vw,92px)}
+  .mani__in{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);column-gap:10px;row-gap:0;align-items:start;padding-left:0}
+  .mani__txt,.mani__q{display:contents}
+  .mani__fig{grid-column:1;grid-row:1/3;width:100%;margin:0 0 -6px;align-self:end}
+  .mani .eyebrow{grid-column:2;grid-row:1;align-self:end;margin:0 0 14px;font-size:.74rem;line-height:1.5;letter-spacing:.12em}
+  .mani__by{grid-column:2;grid-row:2;align-self:start;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;margin:0;font-size:.9rem}
+  .mani__by span{grid-column:1/-1}
+  .mani__big{grid-column:1/-1;grid-row:3;max-width:none;margin:20px 0 22px;font-size:clamp(1.45rem,6.6vw,2.3rem)}
+  .flow3{grid-column:1/-1;grid-row:4;gap:0}
+  .flow3 li{padding:14px 0 16px;border-top:0;border-bottom:2px solid rgba(255,255,255,.18)}
+  .flow3 li::before{top:auto;bottom:-2px}
+  .flow3 li::after{top:auto;bottom:-6px}
+  .flow3 li:last-child{border-bottom-color:rgba(255,255,255,.18)}
+}
+@media (max-width:1000px){.mani__big{margin-top:30px}}
