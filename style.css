@@ -1160,3 +1160,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .adv .card[data-n]::before,.adv .card[data-n]:hover::before{font-size:2.2rem;right:12px;top:8px}
   .adv__wrap{padding-top:44px;padding-bottom:48px}
 }
+/* ---------- Телефон: фото вище, текст не лягає на обличчя ---------- */
+@media (max-width:640px){
+  .photo{translate:0 -120px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 92%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 50%,transparent 76%);
+    mask-image:linear-gradient(90deg,transparent,#000 16%,#000 92%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 50%,transparent 76%)}
+}

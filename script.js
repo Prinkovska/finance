@@ -61,6 +61,7 @@ function resize() {
     t: WORDS[i % WORDS.length], s: 0
   }));
   if (!moved) { const f = faceFront(); cur.x = tgt.x = f.x; cur.y = tgt.y = f.y; }
+  if (typeof draw === 'function' && (reduced || !raf)) draw();
 }
 
 // точка просто перед обличчям (воно дивиться ліворуч)
@@ -93,7 +94,7 @@ function frame(t) {
   hero.style.setProperty('--mx', cur.x + 'px'); hero.style.setProperty('--my', cur.y + 'px');
   hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px');
   hero.style.setProperty('--r', R + 'px');
-  draw();
+  try { draw(); } catch (e) { /* один збійний кадр не повинен зупиняти анімацію */ }
   if (!reduced) requestAnimationFrame(frame);
 }
 
@@ -129,10 +130,13 @@ function draw() {
   ctx.beginPath(); ctx.arc(cur.x, cur.y, R * .72, 0, 7); ctx.stroke(); ctx.restore();
 }
 
+let raf = 0;
 addEventListener('resize', resize);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);   // після завантаження шрифтів перерахувати зону слів
+addEventListener('load', resize);
 resize();
 if (reduced) { const f = faceFront(); cur.x = f.x; cur.y = f.y; hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px'); draw(); }
-else requestAnimationFrame(frame);
+else { raf = 1; requestAnimationFrame(frame); }
 
 /* ---------- поява блоків при скролі ---------- */
 document.documentElement.classList.add('js');
