@@ -4,14 +4,14 @@ const hero = $('#hero'), photo = $('#photo'), cv = $('#cv'), ctx = cv.getContext
 
 /* ---------- заголовок по літерах ---------- */
 (() => {
-  let i = 0;
+  let i = 0, prevLen = 0;
   document.querySelectorAll('#title .ln').forEach(ln => {
     const wrap = (node, out) => node.childNodes.forEach(n => {
       if (n.nodeType === 3) {
         n.textContent.split(/(\s+)/).forEach(part => {
           if (!part) return;
-          if (/^\s+$/.test(part)) { out.append(' '); return; }
-          const w = document.createElement('span'); w.className = 'w';
+          if (/^\s+$/.test(part)) { out.append(prevLen === 1 ? '\u00a0' : ' '); return; }
+          const w = document.createElement('span'); w.className = 'w'; prevLen = [...part].length;
           [...part].forEach(ch => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.setProperty('--i', i++); w.append(s); });
           out.append(w);
         });
@@ -39,7 +39,7 @@ menu.addEventListener('click', e => {
 /* ---------- слова: хаос → порядок ---------- */
 const WORDS = ['ПДВ', 'ЄСВ', 'ЄП', 'P&L', 'Cashflow', 'Balance', '1 240,50', '₴ 85 000', 'Акт', 'Рахунок', 'Звіт', 'КВЕД', 'ПРРО', 'ПДФО',
   'Накладна', 'Баланс', '−12%', '+24%', 'Q3', 'Виписка', 'Табель', 'Дебет', 'Кредит', 'ФОП', 'ТОВ', 'Договір', '3 пр.'];
-let W = 0, H = 0, dpr = 1, G = 110, TOP = 90, XM = 600, tokens = [];
+let W = 0, H = 0, dpr = 1, G = 110, TOP = 90, XM = 600, YM = 0, tokens = [], mob = false;
 const cur = { x: 0, y: 0 }, tgt = { x: 0, y: 0 };
 let lastMove = -1e9, moved = false, R = 260;
 
@@ -49,12 +49,15 @@ function resize() {
   TOP = $('.top').offsetHeight + 8;   // нижня межа шапки (вона фіксована)
   cv.width = W * dpr; cv.height = H * dpr;
   G = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--G')) || 110;
-  XM = Math.max(photo.offsetLeft + photo.offsetWidth * .2, W * (W < 700 ? .45 : .3));   // права межа: слова не заходять на фото
-  const n = Math.max(24, Math.min(80, Math.round(XM * H / 9000)));
+  mob = W < 700;
+  // на телефоні слова живуть у вільній зоні над заголовком і на всю ширину
+  YM = mob ? Math.max(TOP + 140, $('#title').getBoundingClientRect().top - hero.getBoundingClientRect().top - 12) : H;
+  XM = mob ? W - 8 : Math.max(photo.offsetLeft + photo.offsetWidth * .2, W * .3);   // права межа: слова не заходять на фото
+  const n = mob ? Math.max(14, Math.min(26, Math.round(W * (YM - TOP) / 9000))) : Math.max(24, Math.min(80, Math.round(XM * H / 9000)));
   tokens = Array.from({ length: n }, (_, i) => ({
-    x: Math.random() * XM, y: TOP + Math.random() * (H - TOP),
+    x: Math.random() * XM, y: TOP + Math.random() * (YM - TOP),
     vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
-    rot: (Math.random() - .5) * 1.1, size: 12 + (Math.random() * 9 | 0),
+    rot: (Math.random() - .5) * 1.1, size: (mob ? 15 : 12) + (Math.random() * 9 | 0),
     t: WORDS[i % WORDS.length], s: 0
   }));
   if (!moved) { const f = faceFront(); cur.x = tgt.x = f.x; cur.y = tgt.y = f.y; }
@@ -62,6 +65,7 @@ function resize() {
 
 // точка просто перед обличчям (воно дивиться ліворуч)
 function faceFront() {
+  if (mob) return { x: W * .5, y: (TOP + YM) / 2 };
   return { x: XM - W * .14, y: H * .3 };
 }
 
@@ -80,11 +84,11 @@ function frame(t) {
   // якщо користувач не рухає курсором — промінь сам «гуляє»
   if (t - lastMove > 3500) {
     const f = faceFront();
-    tgt.x = f.x + Math.cos(t / 1700) * W * .13;
-    tgt.y = f.y + Math.sin(t / 1100) * H * .12;
+    tgt.x = f.x + Math.cos(t / 1700) * W * (mob ? .3 : .13);
+    tgt.y = f.y + Math.sin(t / 1100) * (mob ? (YM - TOP) * .28 : H * .12);
   }
   cur.x += (tgt.x - cur.x) * .12; cur.y += (tgt.y - cur.y) * .12;
-  R = Math.min(290, Math.max(170, W * .17)) * (1 + .05 * Math.sin(t / 520));
+  R = (mob ? Math.max(120, Math.min(YM - TOP, W) * .42) : Math.min(290, Math.max(170, W * .17))) * (1 + .05 * Math.sin(t / 520));
 
   hero.style.setProperty('--mx', cur.x + 'px'); hero.style.setProperty('--my', cur.y + 'px');
   hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px');
@@ -105,7 +109,7 @@ function draw() {
     const move = reduced ? 0 : 1 - k.s;           // у промені слова завмирають і вишиковуються
     k.x += k.vx * move; k.y += k.vy * move;
     if (k.x < -60) k.x = XM; if (k.x > XM) k.x = -60;
-    if (k.y < TOP - 30) k.y = H + 30; if (k.y > H + 30) k.y = TOP - 30;
+    if (k.y < TOP - 30) k.y = YM + 30; if (k.y > YM + 30) k.y = TOP - 30;
 
     let gx = Math.round(k.x / G) * G, gy = Math.round(k.y / G) * G;
     if (k.s > .35) { let tries = 0; while (taken.has(gx + ':' + gy) && tries++ < 3) gx += G; taken.add(gx + ':' + gy); }
@@ -115,7 +119,8 @@ function draw() {
     ctx.font = `600 ${k.size * (1 + s * .25)}px Montserrat, sans-serif`;
     const edge = Math.max(0, Math.min(1, (y - TOP) / 40));   // біля шапки слова згасають
     const side = Math.max(0, Math.min(1, (XM - x) / 80));    // біля фото слова згасають
-    const a = (.2 + .8 * s) * edge * side;
+    const bot = mob ? Math.max(0, Math.min(1, (YM - y) / 40 + .6)) : 1;
+    const a = ((mob ? .38 : .2) + (mob ? .62 : .8) * s) * edge * side * bot;
     ctx.fillStyle = `rgba(${255 - 4 * s | 0},${255 - 151 * s | 0},${255 - 202 * s | 0},${a})`;
     ctx.fillText(k.t, 0, 0); ctx.restore();
   }
@@ -141,6 +146,7 @@ document.documentElement.classList.add('js');
 /* ---------- відео в оранжевому блоці: грає лише в зоні видимості ---------- */
 (() => {
   const v = document.querySelector('.pain__video'); if (!v) return;
+  if (matchMedia('(max-width:700px)').matches && v.dataset.mob) { v.src = v.dataset.mob; v.load(); }
   if (reduced) { v.removeAttribute('autoplay'); v.pause(); return; }
   new IntersectionObserver(es => es.forEach(e => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }), { threshold: .05 }).observe(v);
 })();

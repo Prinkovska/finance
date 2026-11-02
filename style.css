@@ -1146,3 +1146,17 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .fab__b--tel span{font-size:.85rem}
   body{padding-bottom:0}
 }
+/* ---------- Телефон: перший екран, картки переваг, вертикальне відео ---------- */
+@media (max-width:640px){
+  .photo{translate:0 -64px}
+  .title{font-size:clamp(1.35rem,6.6vw,2rem);margin-bottom:14px}
+  .lead{line-height:1.38;margin-bottom:20px}
+  .shade{background:linear-gradient(0deg,rgba(18,21,33,.96) 6%,rgba(18,21,33,.7) 26%,transparent 56%),linear-gradient(90deg,rgba(18,21,33,.55),rgba(18,21,33,.15) 50%,transparent 70%)}
+  .adv__grid{gap:10px}
+  .adv .card{display:grid;grid-template-columns:30px 1fr;column-gap:14px;align-items:start;padding:16px 16px 18px}
+  .adv .card .card__ico{grid-row:1/3;width:26px;height:26px;margin:2px 0 0}
+  .adv .card h3{font-size:.95rem;margin-bottom:6px;padding-right:44px}
+  .adv .card p{font-size:.86rem;line-height:1.42}
+  .adv .card[data-n]::before,.adv .card[data-n]:hover::before{font-size:2.2rem;right:12px;top:8px}
+  .adv__wrap{padding-top:44px;padding-bottom:48px}
+}
