@@ -1299,3 +1299,4 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .quiz{overflow-x:clip}
   .mani__big{margin-top:-34px}
 }
+@media (max-width:1000px){.mani__fig{translate:0 -88px}.mani__big{margin-top:-8px}}
