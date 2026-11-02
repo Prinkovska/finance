@@ -1206,3 +1206,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .scope.has-fig{--mf:clamp(220px,52vw,330px);margin-top:calc(var(--mf) - 4px)}
   .scope.has-fig .scope__fig{height:var(--mf)}
 }
+/* ---------- Телефон: «+» / «−» у списку послуг, щоб було видно, що пункт розгортається ---------- */
+@media (max-width:900px){
+  .scope__menu button{position:relative;padding-right:44px}
+  .scope__menu button::after{content:"+";position:absolute;right:6px;top:50%;translate:0 -50%;width:28px;height:28px;display:grid;place-items:center;border:1.5px solid var(--orange);border-radius:50%;color:var(--orange);font-family:var(--f-head);font-weight:600;font-size:1.15rem;line-height:1;opacity:.9;transition:background .25s,color .25s,transform .3s}
+  .scope__menu button[aria-selected=true]::after{content:"−";background:var(--orange);color:#fff}
+}
