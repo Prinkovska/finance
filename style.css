@@ -1182,3 +1182,10 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .photo{translate:0 -66px}
   .grid{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 42%,transparent 62%);mask-image:linear-gradient(90deg,#000 0,#000 42%,transparent 62%)}
 }
+/* ---------- Телефон і планшет: спочатку перелік ситуацій, потім «Бухгалтерія — це…» з кнопкою ---------- */
+@media (max-width:1000px){
+  .pain__head{display:contents}
+  .pain__head>.eyebrow,.pain__head>.h2{order:0}
+  .pain__list{order:1}
+  .pain__out{order:2;margin-top:6px;max-width:none}
+}
