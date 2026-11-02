@@ -321,7 +321,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
     requestAnimationFrame(tick);
   }
   screen.addEventListener('click', e => { const b = e.target.closest('[data-act]'); if (b && b.dataset.act === 'start') start(); });
-  btns.forEach(b => b.addEventListener('click', () => answer(b.dataset.c)));
+  btns.forEach(b => b.addEventListener('click', () => { answer(b.dataset.c); b.blur(); }));
   addEventListener('keydown', e => {
     if (!inView || state !== 'play') return;
     const c = { 1: 'income', 2: 'expense', 3: 'tax' }[e.key]; if (c) answer(c);
