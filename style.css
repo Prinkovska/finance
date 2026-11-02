@@ -1229,3 +1229,10 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .scope.has-fig{--mf:clamp(280px,66vw,400px);--depth:calc(var(--mf) * .6)}
   .scope.has-fig .scope__fig img{-webkit-mask-image:linear-gradient(180deg,#000 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 60%,transparent 100%)}
 }
+/* Марія: без «обрізаних» країв (свічення на обгортці, а не під маскою), трохи правіше й ближче до карток */
+@media (max-width:900px){
+  .scope.has-fig{margin-top:calc(var(--mf) - var(--depth))}
+  .scope.has-fig::before{display:none}
+  .scope.has-fig .scope__fig{right:-12px;filter:drop-shadow(12px 0 18px rgba(251,104,53,.5)) drop-shadow(-8px 0 24px rgba(70,110,255,.38))}
+  .scope.has-fig .scope__fig img{filter:brightness(1.1) contrast(1.06)}
+}
