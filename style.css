@@ -1324,3 +1324,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
   .mani__big{margin-top:-30px}
 }
 @media (max-width:1000px){.flow{padding-top:clamp(48px,11vw,62px)}.mani{padding-bottom:clamp(44px,10vw,58px)}}
+
+/* ---------- Телефон: Марія лівіше, тексту справа більше місця ---------- */
+@media (max-width:1000px){
+  .mani__in{grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr)}
+  .mani__fig{translate:-22px -50px;width:112%}
+}
