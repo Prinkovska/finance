@@ -1343,3 +1343,4 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 .card h3,.svc-card h3,.tcard h3{line-height:1.18}
 .card p,.svc-card p,.tcard>p{line-height:1.38}
 .adv .card h3,.svc-card h3{overflow-wrap:break-word}
+@media (max-width:640px){.adv .card p,.svc .svc-card p{line-height:1.36}}
