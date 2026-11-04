@@ -1339,3 +1339,7 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 .pain__n{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35)}
 .pain__veil{background:linear-gradient(90deg,rgba(14,17,30,.6),rgba(14,17,30,.46) 55%,rgba(14,17,30,.38))}
 .pain .h2 em{white-space:nowrap}
+/* ---------- Картки: менший міжрядковий інтервал ---------- */
+.card h3,.svc-card h3,.tcard h3{line-height:1.18}
+.card p,.svc-card p,.tcard>p{line-height:1.38}
+.adv .card h3,.svc-card h3{overflow-wrap:break-word}
