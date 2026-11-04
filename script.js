@@ -53,6 +53,7 @@ let W = 0, H = 0, dpr = 1, G = 110, TOP = 90, XM = 600, YM = 0, tokens = [], mob
 const cur = { x: 0, y: 0 }, tgt = { x: 0, y: 0 };
 let lastMove = -1e9, moved = false, R = 260;
 const gridEl = hero.querySelector('.grid');
+let travel = 0, hintGone = false; const hintAt = performance.now() + 1800;   // підказка з'являється приблизно через 1,8 с після завантаження
 let lite = false, heroOn = true, running = false, lastDraw = 0, fpsN = 0, fpsT = 0, fpsPrev = 0;
 
 function resize() {
@@ -84,9 +85,13 @@ function faceFront() {
 
 function setPointer(e) {
   const r = hero.getBoundingClientRect();
-  tgt.x = e.clientX - r.left; tgt.y = e.clientY - r.top;
+  const nx = e.clientX - r.left, ny = e.clientY - r.top;
+  travel += Math.hypot(nx - tgt.x, ny - tgt.y);             // скільки користувач реально поводив курсором
+  tgt.x = nx; tgt.y = ny;
   lastMove = performance.now();
-  if (!moved) { moved = true; $('#hint').classList.add('gone'); }
+  moved = true;
+  // підказку ховаємо, лише коли її вже було видно кілька секунд і курсором справді повели (не від першого дотику)
+  if (!hintGone && travel > 450 && lastMove - hintAt > 4500) { hintGone = true; $('#hint').classList.add('gone'); }
 }
 hero.addEventListener('pointermove', setPointer);
 hero.addEventListener('pointerdown', setPointer);
