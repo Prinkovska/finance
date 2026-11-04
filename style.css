@@ -1348,9 +1348,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 /* ---------- Перший екран: легший режим і пауза поза видимістю ---------- */
 .hero.off *,.hero.off *::before,.hero.off *::after{animation-play-state:paused!important}
 .rim{will-change:opacity}
-.lite .rim{display:none}
-.lite .photo__glow{display:none}
-.lite .cv{opacity:.95}
+/* легкий режим: промені лишаються, але без важкого розмиття й анімації (самі градієнти вже м'які) */
+.lite .rim{filter:none;animation:none;opacity:.9}
+.lite .photo__glow{opacity:.9}
 /* ---------- «Про цифри»: лише цитата Марії й фото; рука виходить над блок (ПК і мобільні) ---------- */
 #about{z-index:31}
 #services>.tab{display:none}
