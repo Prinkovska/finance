@@ -52,9 +52,11 @@ const WORDS = ['ПДВ', 'ЄСВ', 'ЄП', 'P&L', 'Cashflow', 'Balance', '1 240,
 let W = 0, H = 0, dpr = 1, G = 110, TOP = 90, XM = 600, YM = 0, tokens = [], mob = false;
 const cur = { x: 0, y: 0 }, tgt = { x: 0, y: 0 };
 let lastMove = -1e9, moved = false, R = 260;
+const gridEl = hero.querySelector('.grid');
+let lite = false, heroOn = true, running = false, lastDraw = 0, fpsN = 0, fpsT = 0, fpsPrev = 0;
 
 function resize() {
-  dpr = Math.min(2, devicePixelRatio || 1);
+  dpr = Math.min(lite ? 1 : 1.5, devicePixelRatio || 1);   // менша роздільність полотна: слова напівпрозорі, різниця непомітна
   W = hero.clientWidth; H = hero.clientHeight;
   TOP = $('.top').offsetHeight + 8;   // нижня межа шапки (вона фіксована)
   cv.width = W * dpr; cv.height = H * dpr;
@@ -63,7 +65,7 @@ function resize() {
   // на телефоні слова живуть у вільній зоні над заголовком і на всю ширину
   YM = mob ? Math.max(TOP + 140, $('#title').getBoundingClientRect().top - hero.getBoundingClientRect().top - 12) : H;
   XM = mob ? W * .6 : Math.max(photo.offsetLeft + photo.offsetWidth * .2, W * .3);   // права межа: слова не заходять на фото
-  const n = mob ? Math.max(14, Math.min(26, Math.round(W * (YM - TOP) / 9000))) : Math.max(24, Math.min(80, Math.round(XM * H / 9000)));
+  const n = mob ? Math.max(14, Math.min(26, Math.round(W * (YM - TOP) / 9000))) : Math.max(20, Math.min(lite ? 24 : 52, Math.round(XM * H / 11000)));
   tokens = Array.from({ length: n }, (_, i) => ({
     x: Math.random() * XM, y: TOP + Math.random() * (YM - TOP),
     vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
@@ -101,12 +103,21 @@ function frame(t) {
   cur.x += (tgt.x - cur.x) * .12; cur.y += (tgt.y - cur.y) * .12;
   R = (mob ? Math.max(120, Math.min(YM - TOP, W) * .42) : Math.min(290, Math.max(170, W * .17))) * (1 + .05 * Math.sin(t / 520));
 
-  hero.style.setProperty('--mx', cur.x + 'px'); hero.style.setProperty('--my', cur.y + 'px');
-  hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px');
-  hero.style.setProperty('--r', R + 'px');
+  photo.style.setProperty('--px', (cur.x - photo.offsetLeft).toFixed(1) + 'px'); photo.style.setProperty('--py', (cur.y - photo.offsetTop).toFixed(1) + 'px'); photo.style.setProperty('--r', R.toFixed(1) + 'px');
+  gridEl.style.setProperty('--mx', cur.x.toFixed(1) + 'px'); gridEl.style.setProperty('--my', cur.y.toFixed(1) + 'px'); gridEl.style.setProperty('--r', R.toFixed(1) + 'px');
   try { draw(); } catch (e) { /* один збійний кадр не повинен зупиняти анімацію */ }
-  if (!reduced) requestAnimationFrame(frame);
 }
+function loop(t) {
+  if (!heroOn || document.hidden) { running = false; return; }      // екран поза видимістю: нічого не малюємо
+  requestAnimationFrame(loop);
+  if (t - lastDraw < (lite ? 33 : 15)) return;                     // у «легкому» режимі ~30 кадрів/с
+  // вимір швидкості (після вступних анімацій): якщо 90 кадрів поспіль повільніші за ~37 кадрів/с, вмикаємо легкий режим
+  if (!lite && fpsPrev && t > 3500) { fpsN++; fpsT += t - fpsPrev; if (fpsN === 90) { if (fpsT / fpsN > 27) { lite = true; document.documentElement.classList.add('lite'); resize(); } fpsN = -1e9; } }
+  fpsPrev = t; lastDraw = t; frame(t);
+}
+function startLoop() { if (!running && heroOn && !reduced) { running = true; fpsPrev = 0; requestAnimationFrame(loop); } }
+new IntersectionObserver(es => es.forEach(e => { heroOn = e.isIntersecting; hero.classList.toggle('off', !heroOn); if (heroOn) startLoop(); }), { threshold: 0 }).observe(hero);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) startLoop(); });
 
 function draw() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -145,8 +156,8 @@ addEventListener('resize', resize);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);   // після завантаження шрифтів перерахувати зону слів
 addEventListener('load', resize);
 resize();
-if (reduced) { tokens.forEach(k => { k.s = 1; }); const f = faceFront(); cur.x = f.x; cur.y = f.y; hero.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); hero.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px'); draw(); }
-else { raf = 1; requestAnimationFrame(frame); }
+if (reduced) { tokens.forEach(k => { k.s = 1; }); const f = faceFront(); cur.x = f.x; cur.y = f.y; photo.style.setProperty('--px', (cur.x - photo.offsetLeft) + 'px'); photo.style.setProperty('--py', (cur.y - photo.offsetTop) + 'px'); gridEl.style.setProperty('--mx', cur.x + 'px'); gridEl.style.setProperty('--my', cur.y + 'px'); draw(); }
+else { raf = 1; startLoop(); }
 
 /* ---------- поява блоків при скролі ---------- */
 document.documentElement.classList.add('js');
