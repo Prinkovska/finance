@@ -1,4 +1,14 @@
 const $ = s => document.querySelector(s);
+
+/* ---------- нерозривні пробіли: короткі слова не залишаються «хвостиками» в кінці рядка ---------- */
+const NB_RE = /(^|[^\p{L}\p{N}])(в|у|і|й|з|із|зі|та|на|до|по|за|не|ні|що|як|чи|а|о|про|для|під|над|при|без|від|ви|ми|це|ще|я|бо|ж|же)\s+(?=[\p{L}\p{N}«“"(])/giu;
+const nb = s => {
+  let r = String(s);
+  for (let i = 0; i < 3; i++) r = r.replace(NB_RE, '$1$2\u00a0');
+  return r.replace(/(\d+) (?=\p{L})/gu, '$1\u00a0').replace(/Happy Finance/g, 'Happy\u00a0Finance').replace(/(\S) (\p{L}{1,3}[.?!…:]?)(\s*)$/u, '$1\u00a0$2$3')
+    .replace(/^(?=(?:\S+\s+){3,}\S)(.*?)(\S+) (\S+)(\s*)$/su, '$1$2\u00a0$3$4');
+};
+const nbHtml = h => h.replace(/>([^<>]+)</g, (m, t) => '>' + nb(t) + '<');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hero = $('#hero'), photo = $('#photo'), cv = $('#cv'), ctx = cv.getContext('2d');
 
@@ -166,30 +176,30 @@ document.querySelectorAll('.svc-card').forEach(c => c.addEventListener('pointerm
       ['Реєстрація', 'Відкриваємо ФОП для послуг, торгівлі чи виробництва.', ['Допомога з вибором системи оподаткування', 'Підготовка та подання документів', 'Постановка на облік']],
       ['Щомісячний супровід', 'Єдиний податок 2, 3, 4 груп, з ПДВ і без.', ['Оформлення первинних документів', 'Ведення бази та облік операцій', 'Здача звітів вчасно', 'Нарахування й сплата податків']],
       ['Кадровий облік', 'Порядок у кадрових документах і зарплаті.', ['Кадрові документи та табелі', 'Нарахування зарплати', 'Податки із зарплати']],
-      ['Фінансовий супровід', 'Цифри, які зрозуміло показують стан справ.', ['Прибутки й збитки (P&L)', 'Рух грошей (Cash Flow)', 'Пояснення простими словами']],
-      ['Фінансовий моніторинг', 'Допомагаємо з вимогами та нестандартними запитами.', ['Консультації за вашим випадком', 'Підготовка необхідних документів', 'Пошук варіантів рішення']],
-      ['Закриття ФОП', 'Акуратно завершуємо діяльність без «хвостів».', ['Завершальна звітність', 'Розрахунки з бюджетом', 'Зняття з обліку']]
+      ['Фінансовий супровід', 'Раз на місяць пояснюємо простими словами, скільки ви заробили й куди пішли гроші.', ['Прибутки й збитки (P&L)', 'Рух грошей (Cash Flow)', 'Пояснення простими словами']],
+      ['Фінансовий моніторинг', 'Прийшов запит від банку чи держоргану? Допоможемо підготувати документи й відповідь.', ['Консультації за вашим випадком', 'Підготовка необхідних документів', 'Пошук варіантів рішення']],
+      ['Закриття ФОП', 'Подаємо завершальну звітність, розраховуємось із бюджетом, знімаємо ФОП з обліку.', ['Завершальна звітність', 'Розрахунки з бюджетом', 'Зняття з обліку']]
     ] },
     tov: { label: 'ТОВ', items: [
       ['Бухгалтерський супровід', 'Облік і звітність на загальній системі або єдиному податку.', ['ПДВ, експорт та інші особливості', 'Первинні документи', 'Звітність і податки']],
       ['ПДВ', 'Облік і звітність з ПДВ без пропущених термінів.', ['Податкові накладні', 'Декларації та звітність', 'Контроль термінів']],
       ['Клієнт-банк', 'Щоденна робота з рахунками компанії.', ['Платежі та виписки', 'Звірка з банком', 'Облік руху коштів']],
       ['Зарплата та кадри', 'Нарахування й кадровий облік для команди.', ['Нарахування зарплати', 'Податки із зарплати', 'Кадрові документи']],
-      ['Управлінський облік', 'Інструменти, за якими керують бізнесом.', ['Управлінські документи', 'Бланки для систематизації процесів', 'Звіти P&L, Cash Flow, Balance']],
-      ['Ревізія обліку', 'Перевіряємо чинний облік і знаходимо слабкі місця.', ['Аналіз бухгалтерського обліку', 'Виявлення недоліків і порушень', 'План виправлення']]
+      ['Управлінський облік', 'Ви бачите прибуток, рух грошей і борги за будь-який період.', ['Управлінські документи', 'Шаблони документів і таблиць для вашої команди', 'Звіти P&L, Cash Flow, Balance']],
+      ['Ревізія обліку', 'Перевіряємо ваш облік і показуємо, де є помилки та що виправити.', ['Аналіз бухгалтерського обліку', 'Виявлення недоліків і порушень', 'План виправлення']]
     ] }
   };
   const btns = [...seg.querySelectorAll('button')], mobile = matchMedia('(max-width:900px)');
   let tab = 'fop', cur = 0;
 
   const place = b => { seg.style.setProperty('--tx', b.offsetLeft - 4 + 'px'); seg.style.setProperty('--tw', b.offsetWidth + 'px'); };
-  const esc = s => s.replace(/&/g, '&amp;');
+  const esc = s => nb(s.replace(/&/g, '&amp;'));
   function renderMenu() {
     menuEl.innerHTML = DATA[tab].items.map((it, i) => `<button type="button" role="tab" aria-selected="${i === cur}" data-i="${i}" style="--i:${i}"><span class="scope__n">${String(i + 1).padStart(2, '0')}</span><span>${esc(it[0])}</span></button>`).join('');
   }
   function renderDetail(animate) {
     const d = DATA[tab], it = d.items[cur];
-    detail.innerHTML = `<p class="scope__tag">${d.label} · ${String(cur + 1).padStart(2, '0')}</p><h3>${esc(it[0])}</h3><p class="scope__desc">${esc(it[1])}</p><ul>${it[2].map((t, i) => `<li style="--i:${i}">${esc(t)}</li>`).join('')}</ul><a class="btn btn--lg" href="#lead" data-open="lead" data-service="${d.label}: ${esc(it[0])}">Обговорити цю послугу</a>`;
+    detail.innerHTML = `<p class="scope__tag">${d.label} · ${String(cur + 1).padStart(2, '0')}</p><h3>${esc(it[0])}</h3><p class="scope__desc">${esc(it[1])}</p><ul>${it[2].map((t, i) => `<li style="--i:${i}">${esc(t)}</li>`).join('')}</ul><a class="btn btn--lg" href="#lead" data-open="lead" data-service="${d.label}: ${esc(it[0])}">Запитати про цю послугу</a>`;
     if (animate) { detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap'); }
   }
   function layout() {
@@ -218,13 +228,13 @@ document.querySelectorAll('.svc-card').forEach(c => c.addEventListener('pointerm
 /* ---------- маніфест: слова «загоряються» під час прокрутки ---------- */
 const mani = $('#maniBig');
 if (mani) {
-  const words = mani.textContent.trim().split(/\s+/);
+  const tokens = mani.textContent.trim().split(/(\s+)/), words = tokens.filter((_, i) => i % 2 === 0), seps = tokens.filter((_, i) => i % 2 === 1).map(s => /\u00a0/.test(s) ? '\u00a0' : ' ');
   mani.setAttribute('aria-label', words.join(' '));
   mani.textContent = '';
   words.forEach((w, i) => {
     const s = document.createElement('span'), t = document.createElement('span');
     s.className = 'wd' + (/ілюзія/i.test(w) ? ' hl' : ''); t.className = 'wd__i'; t.style.setProperty('--i', i); t.textContent = w;
-    s.append(t); mani.append(s, ' ');
+    s.append(t); mani.append(s, seps[i] || ' ');
   });
   // слова висуваються знизу, коли фраза з'являється на екрані; підсвічування йде за прокруткою
   if (reduced || !('IntersectionObserver' in window)) mani.classList.add('rise');
@@ -276,7 +286,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const paint = () => { scoreEl.textContent = score; hearts.forEach((el, i) => el.classList.toggle('lost', i >= lives)); };
   const setBtns = on => btns.forEach(b => b.disabled = !on);
-  const showScreen = html => { screen.innerHTML = html; screen.classList.add('on'); setBtns(false); };
+  const showScreen = html => { screen.innerHTML = nbHtml(html); screen.classList.add('on'); setBtns(false); };
 
   function intro() {
     state = 'idle'; op.hidden = true;
@@ -310,7 +320,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
   function end() {
     state = 'end'; op.hidden = true;
     const win = lives > 0;
-    showScreen(`<h3>${win ? 'Баланс зведено!' : 'Баланс не зійшовся'}</h3><p>Ваш рахунок: ${score} з ${OPS.length}. ${win ? 'У реальному обліку таку роботу краще довірити тим, хто робить її щодня.' : 'У реальному обліку помилки коштують дорожче, тому краще мати поруч фахівця.'}</p><div class="row"><a class="btn btn--lg" href="#quiz" data-act="quiz">Підібрати пакет</a><button class="btn btn--ghost btn--lg" type="button" data-act="start">Ще раз</button></div>`);
+    showScreen(`<h3>${win ? 'Баланс зведено!' : 'Баланс не зійшовся'}</h3><p>Ваш рахунок: ${score} з ${OPS.length}. ${win ? 'У реальному бізнесі таких операцій набагато більше. Хочете, щоб їх вели ми? Підберіть формат за хвилину.' : 'Це нормально: у реальному бізнесі таких операцій багато, тому їх краще вести фахівцям. Підберіть формат супроводу за хвилину.'}</p><div class="row"><a class="btn btn--lg" href="#quiz" data-act="quiz">Підібрати пакет</a><button class="btn btn--ghost btn--lg" type="button" data-act="start">Ще раз</button></div>`);
   }
   function tick(t) {
     if (state === 'play' && inView && !document.hidden && !reduced) {
@@ -347,7 +357,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
     stepEl.textContent = `Питання ${step + 1} з ${Q.length}`;
     bar.style.width = (step / Q.length * 100) + '%';
     back.hidden = step === 0;
-    body.innerHTML = `<h3 class="quiz__q">${Q[step].q}</h3><div class="quiz__opts">${Q[step].o.map((t, i) => `<button type="button" style="--i:${i}" data-i="${i}" class="${ans[step] === i ? 'sel' : ''}">${t}</button>`).join('')}</div>`;
+    body.innerHTML = `<h3 class="quiz__q">${nb(Q[step].q)}</h3><div class="quiz__opts">${Q[step].o.map((t, i) => `<button type="button" style="--i:${i}" data-i="${i}" class="${ans[step] === i ? 'sel' : ''}">${nb(t)}</button>`).join('')}</div>`;
   }
   function result() {
     stepEl.textContent = 'Готово'; bar.style.width = '100%'; back.hidden = false;
@@ -360,7 +370,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
     const lc = s => s[0].toLowerCase() + s.slice(1);
     const profile = `${Q[0].o[b]}, ${lc(Q[1].o[tx])}, ${lc(Q[2].o[team])}`;
     const text = `Доброго дня! Пройшов(ла) підбір пакета на сайті Happy Finance. Про мене: ${profile}. Найважливіше: ${lc(Q[3].o[goal])}. Хочу обговорити формат супроводу.`;
-    body.innerHTML = `<div class="quiz__res"><h3>Ваш формат супроводу</h3><p class="quiz__sum">${profile}</p><ul class="quiz__list">${list.map((t, i) => `<li style="--i:${i}">${t}</li>`).join('')}</ul><div class="quiz__act"><a class="btn btn--lg" href="${TG}?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">Написати в Telegram</a><a class="btn btn--ghost btn--lg quiz__tel" href="${TEL}">Зателефонувати</a></div><p class="quiz__note">Склад і вартість уточнимо під ваш запит. Це орієнтовний підбір, не остаточна пропозиція.</p></div>`;
+    body.innerHTML = `<div class="quiz__res"><h3>Ваш формат супроводу</h3><p class="quiz__sum">${nb(profile)}</p><ul class="quiz__list">${list.map((t, i) => `<li style="--i:${i}">${nb(t)}</li>`).join('')}</ul><div class="quiz__act"><a class="btn btn--lg" href="${TG}?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">Написати в Telegram</a><a class="btn btn--ghost btn--lg quiz__tel" href="${TEL}">Зателефонувати</a></div><p class="quiz__note">${nb('Склад і вартість уточнимо після короткої розмови. Це попередній підбір.')}</p></div>`;
   }
   body.addEventListener('click', e => {
     const b = e.target.closest('button[data-i]'); if (!b) return;
@@ -666,7 +676,7 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
       ],
       tags: ['Первинні документи', 'Податкова звітність', 'ТОВ і ФОП', 'Звірки з податковою', 'Управлінський облік'] },
     { n: 'Карина Омельченко', role: 'Первинні документи, ПРРО', img: 'img/team-karyna.jpg',
-      lead: 'Відповідає за щоденні операції: первинні документи та роботу з ПРРО, щоб в обліку не було прогалин.',
+      lead: 'Веде щоденні операції: первинні документи та ПРРО. Ви надсилаєте документи, ми оформлюємо їх без пропусків.',
       path: [
         ['Роздрібна торгівля', 'Продавець, потім адміністратор.'],
         ['Агросектор', 'Бухгалтер у компанії аграрного напряму.'],
@@ -682,7 +692,7 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
       ],
       tags: ['Зарплата', 'Кадрові розрахунки', 'Понад 20 років досвіду'] },
     { n: 'Надія Гончаренко', role: 'Закупівлі, первинні документи', ini: 'НГ',
-      lead: 'Керувала відділом обліку первинних документів і закупівлями. Знає, як будуються процеси.',
+      lead: 'Керувала відділом обліку первинних документів і закупівлями. Допомагає навести лад у документах і поставках.',
       path: [
         ['Роздрібна мережа', 'Менеджер із закупівель: асортимент, ціноутворення, акції, переговори з постачальниками, документообіг.'],
         ['Аудиторська компанія', 'Бухгалтерія кількох підприємств, первинні документи, акти звірок, підготовка до податкових перевірок.'],
@@ -694,13 +704,13 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
   const cards = [...document.querySelectorAll('.tcard')];
   const el = { top: $('#drTop'), body: $('#drBody'), tag: $('#drTag'), name: $('#drName'), role: $('#drRole'), lead: $('#drLead'), path: $('#drPath'), tags: $('#drTags') };
   let cur = 0, opener = null, closing = 0;
-  const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const esc = s => nb(String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'));
 
   function render(i, animate) {
     cur = (i + TEAM.length) % TEAM.length; const m = TEAM[cur];
     el.top.innerHTML = m.img ? `<img src="${m.img}" alt="">` : `<span class="drawer__ini" aria-hidden="true">${m.ini}</span>`;
     el.tag.textContent = `Команда · ${String(cur + 1).padStart(2, '0')} / ${String(TEAM.length).padStart(2, '0')}`;
-    el.name.textContent = m.n; el.role.textContent = m.role; el.lead.textContent = m.lead;
+    el.name.textContent = m.n; el.role.textContent = nb(m.role); el.lead.textContent = nb(m.lead);
     el.path.innerHTML = m.path.map((p, k) => `<li style="--i:${k}"><b>${esc(p[0])}</b><span>${esc(p[1])}</span></li>`).join('');
     el.tags.innerHTML = m.tags.map(t => `<li>${esc(t)}</li>`).join('');
     el.body.scrollTop = 0;
