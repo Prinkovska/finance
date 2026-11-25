@@ -1374,3 +1374,9 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 @media (min-width:1001px){
   .mani{--mpb:clamp(44px,4vw,60px);padding-bottom:var(--mpb)}
 }.btn[hidden]{display:none}
+/* Переваги: акуратні номери й іконки на плашці (як у «Послугах») */
+.adv .card[data-n]::before,.adv .card[data-n]:hover::before{font-size:.8rem;font-weight:700;letter-spacing:.16em;right:22px;top:24px;color:rgba(255,255,255,.45);-webkit-text-stroke:0;transition:color .3s}
+.adv .card[data-n]:hover::before{color:var(--orange)}
+.adv .card .card__ico{width:52px;height:52px;padding:12px;box-sizing:border-box;border-radius:14px;background:rgba(251,104,53,.14);transition:background .3s,stroke .3s}
+.adv .card:hover .card__ico{background:var(--orange);stroke:#fff}
+@media (max-width:640px){.adv .card{grid-template-columns:40px 1fr}.adv .card .card__ico{width:40px;height:40px;padding:9px;border-radius:11px;margin:0}.adv .card[data-n]::before,.adv .card[data-n]:hover::before{font-size:.72rem;right:14px;top:16px}}
