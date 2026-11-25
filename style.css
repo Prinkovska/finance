@@ -819,6 +819,7 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 .foot__contacts{display:grid;gap:10px;align-content:start;font-family:var(--f-head);font-weight:600;font-size:.95rem}
 .foot a:hover{color:var(--orange)}
 .foot__bar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;opacity:.7}
+.foot__concept{padding:14px 0 26px;padding-left:var(--ind);font-size:.78rem;line-height:1.5;opacity:.55;max-width:none}
 .brand--static .brand__word{animation:none}
 
 @media (max-width:1000px){
@@ -1372,4 +1373,4 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 }
 @media (min-width:1001px){
   .mani{--mpb:clamp(44px,4vw,60px);padding-bottom:var(--mpb)}
-}
+}.btn[hidden]{display:none}
