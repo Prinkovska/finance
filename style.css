@@ -59,7 +59,7 @@ img{display:block}
 @property --w{syntax:'<percentage>';inherits:false;initial-value:0%}
 .brand__frame{--a:0deg;-webkit-mask-image:conic-gradient(#000 var(--a),transparent calc(var(--a) + .5deg));mask-image:conic-gradient(#000 var(--a),transparent calc(var(--a) + .5deg));animation:ring 1.5s .3s cubic-bezier(.5,0,.3,1) both}
 .brand__h{--w:0%;-webkit-mask-image:linear-gradient(90deg,#000 var(--w),transparent calc(var(--w) + 14%));mask-image:linear-gradient(90deg,#000 var(--w),transparent calc(var(--w) + 14%));animation:wipe 1.3s 1.5s cubic-bezier(.5,0,.3,1) both}
-.brand__word{height:38px;width:auto;animation:word .9s 2.5s both}
+.brand__word{display:block;font-family:var(--f-head);font-weight:800;font-size:17px;line-height:.98;letter-spacing:.05em;text-transform:uppercase;color:#fff;white-space:nowrap;animation:word .9s 2.5s both}
 @keyframes ring{from{--a:0deg}to{--a:361deg}}
 @keyframes wipe{from{--w:0%}to{--w:100%}}
 @keyframes word{from{opacity:0;transform:translateX(-8px)}}
@@ -113,7 +113,7 @@ img{display:block}
   :root{--G:80px;--ind:0px}
   .hero{--r:190px}
   .hint{top:84px;font-size:.68rem}
-  .brand__mark{width:38px;height:38px}.brand__word{height:32px}
+  .brand__mark{width:38px;height:38px}.brand__word{font-size:14.5px}
   .title{font-size:clamp(1.55rem,8vw,2.4rem);margin-bottom:18px}
   .lead{font-size:.95rem;margin-bottom:22px}
   .cta{flex-direction:column}.cta .btn{text-align:center}

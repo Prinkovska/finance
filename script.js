@@ -5,7 +5,7 @@ const NB_RE = /(^|[^\p{L}\p{N}])(в|у|і|й|з|із|зі|та|на|до|по|з
 const nb = s => {
   let r = String(s);
   for (let i = 0; i < 3; i++) r = r.replace(NB_RE, '$1$2\u00a0');
-  return r.replace(/(\d+) (?=\p{L})/gu, '$1\u00a0').replace(/Happy Finance/g, 'Happy\u00a0Finance').replace(/(\S) (\p{L}{1,3}[.?!…:]?)(\s*)$/u, '$1\u00a0$2$3')
+  return r.replace(/(\d+) (?=\p{L})/gu, '$1\u00a0').replace(/Норма Фінанс/g, 'Норма\u00a0Фінанс').replace(/(\S) (\p{L}{1,3}[.?!…:]?)(\s*)$/u, '$1\u00a0$2$3')
     .replace(/^(?=(?:\S+\s+){3,}\S)(.*?)(\S+) (\S+)(\s*)$/su, '$1$2\u00a0$3$4');
 };
 const nbHtml = h => h.replace(/>([^<>]+)</g, (m, t) => '>' + nb(t) + '<');
@@ -327,7 +327,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
     op.classList.add(ok ? 'ok' : 'bad');
     if (!ok && wrongNote) op.querySelector('.op__t').textContent = cur.t + ' → ' + LABEL[cur.c];
     live.textContent = ok ? 'Вірно' : 'Невірно: ' + LABEL[cur.c];
-    const fig = $('#gFig');                          // Марія реагує: підстрибує на вірну відповідь, хитає головою на помилку
+    const fig = $('#gFig');                          // Олена реагує: підстрибує на вірну відповідь, хитає головою на помилку
     if (fig) { fig.classList.remove('happy', 'oops'); void fig.offsetWidth; fig.classList.add(ok ? 'happy' : 'oops'); }
     paint(); idx++;
     setTimeout(() => { op.hidden = true; next(); }, ok ? 380 : 1000);
@@ -367,7 +367,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
     { q: 'Що зараз найважливіше?', o: ['Облік і звітність без клопоту', 'Зарплата й кадри', 'Цифри для управління бізнесом', 'Навести лад у процесах і документах'] }
   ];
   let step = 0, ans = [];
-  const TG = 'https://t.me/MariiaPanchenko_ua', TEL = 'tel:+380663568040';
+  const TG = 'https://t.me/Anactacya_stacyland', TEL = 'tel:+380505986200';
 
   function render() {
     stepEl.textContent = `Питання ${step + 1} з ${Q.length}`;
@@ -385,7 +385,7 @@ addEventListener('scroll', onScroll, { passive: true }); addEventListener('resiz
     const list = [...new Set(items)];
     const lc = s => s[0].toLowerCase() + s.slice(1);
     const profile = `${Q[0].o[b]}, ${lc(Q[1].o[tx])}, ${lc(Q[2].o[team])}`;
-    const text = `Доброго дня! Пройшов(ла) підбір пакета на сайті Happy Finance. Про мене: ${profile}. Найважливіше: ${lc(Q[3].o[goal])}. Хочу обговорити формат супроводу.`;
+    const text = `Доброго дня! Пройшов(ла) підбір пакета на сайті Норма Фінанс. Про мене: ${profile}. Найважливіше: ${lc(Q[3].o[goal])}. Хочу обговорити формат супроводу.`;
     body.innerHTML = `<div class="quiz__res"><h3>Ваш формат супроводу</h3><p class="quiz__sum">${nb(profile)}</p><ul class="quiz__list">${list.map((t, i) => `<li style="--i:${i}">${nb(t)}</li>`).join('')}</ul><div class="quiz__act"><a class="btn btn--lg" href="${TG}?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">Написати в Telegram</a><a class="btn btn--ghost btn--lg quiz__tel" href="${TEL}">Зателефонувати</a></div><p class="quiz__note">${nb('Склад і вартість уточнимо після короткої розмови. Це попередній підбір.')}</p></div>`;
   }
   body.addEventListener('click', e => {
@@ -456,13 +456,13 @@ document.querySelectorAll('[data-count]').forEach(el => {
   const modal = $('#lead'); if (!modal) return;
   const form = $('#leadForm'), err = $('#leadErr'), ok = $('#leadOk');
   let opener = null;
-  const svcEl = $('#leadSvc'), tg = modal.querySelector('.modal__tg'), TG = 'https://t.me/MariiaPanchenko_ua';
+  const svcEl = $('#leadSvc'), tg = modal.querySelector('.modal__tg'), TG = 'https://t.me/Anactacya_stacyland';
   const open = el => {
     opener = el; modal.hidden = false; document.body.classList.add('lock');
     form.reset(); err.hidden = true; ok.hidden = true; form.querySelector('.btn').hidden = false;
     const svc = (el && el.dataset.service) || '';   // назва послуги, якщо відкрили з блоку «Послуги»
     svcEl.hidden = !svc; svcEl.textContent = svc ? 'Послуга: ' + svc : '';
-    tg.href = svc ? TG + '?text=' + encodeURIComponent('Доброго дня! Цікавить послуга на сайті Happy Finance: ' + svc + '. Хочу обговорити.') : TG;
+    tg.href = svc ? TG + '?text=' + encodeURIComponent('Доброго дня! Цікавить послуга на сайті Норма Фінанс: ' + svc + '. Хочу обговорити.') : TG;
     setTimeout(() => form.elements.name.focus(), 50);
   };
   const close = () => { modal.hidden = true; document.body.classList.remove('lock'); opener && opener.focus && opener.focus(); };
@@ -613,7 +613,7 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
 
 /* ================= ЗАВЕРШАЛЬНІ БЛОКИ ================= */
 
-/* ---------- Марія: лічильники ×4 та ~300 ---------- */
+/* ---------- Олена: лічильники ×4 та ~300 ---------- */
 (() => {
   const els = [...document.querySelectorAll('[data-to]')]; if (!els.length) return;
   const run = el => {
@@ -681,7 +681,7 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
   const dr = $('#drawer'); if (!dr) return;
   // TODO клієнтка: підтвердити тексти з кожною людиною. Лише професійні факти з наданих документів.
   const TEAM = [
-    { n: 'Євгенія Мазепа', role: 'Головний бухгалтер', img: 'img/team-evgenia.jpg',
+    { n: 'Ірина Бондар', role: 'Головний бухгалтер', img: 'img/team-iryna.jpg',
       lead: 'Веде бухгалтерію від первинних документів до звітності й знає бізнес з боку фінансового директора.',
       path: [
         ['Автомагазин', 'Менеджер і первинна бухгалтерія, допомога в розмитненні вантажів.'],
@@ -691,15 +691,15 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
         ['Фінансовий менеджер', 'Керувала грошовими потоками в нішевій сфері.']
       ],
       tags: ['Первинні документи', 'Податкова звітність', 'ТОВ і ФОП', 'Звірки з податковою', 'Управлінський облік'] },
-    { n: 'Карина Омельченко', role: 'Первинні документи, ПРРО', img: 'img/team-karyna.jpg',
+    { n: 'Катерина Мельник', role: 'Первинні документи, ПРРО', img: 'img/team-kateryna.jpg',
       lead: 'Веде щоденні операції: первинні документи та ПРРО. Ви надсилаєте документи, ми оформлюємо їх без пропусків.',
       path: [
         ['Роздрібна торгівля', 'Продавець, потім адміністратор.'],
         ['Агросектор', 'Бухгалтер у компанії аграрного напряму.'],
-        ['Happy\u00a0Finance', 'Первинні документи та ПРРО.']
+        ['Норма\u00a0Фінанс', 'Первинні документи та ПРРО.']
       ],
       tags: ['Первинні документи', 'ПРРО', 'Щоденні операції', 'Роздрібна торгівля'] },
-    { n: 'Юлія Авер’янова', role: 'Зарплата', ini: 'ЮА',
+    { n: 'Тетяна Савчук', role: 'Зарплата', img: 'img/team-tetiana.jpg',
       lead: 'Понад 20 років у бухгалтерії. Відповідає за нарахування зарплати та кадрові розрахунки.',
       path: [
         ['Початок шляху', 'Касир, потім головний бухгалтер на невеликому підприємстві.'],
@@ -707,7 +707,7 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
         ['Понад 15 років в одній компанії', 'Бухгалтер із дипломом спеціаліста.']
       ],
       tags: ['Зарплата', 'Кадрові розрахунки', 'Понад 20 років досвіду'] },
-    { n: 'Надія Гончаренко', role: 'Закупівлі, первинні документи', ini: 'НГ',
+    { n: 'Оксана Литвин', role: 'Закупівлі, первинні документи', img: 'img/team-oksana.jpg',
       lead: 'Керувала відділом обліку первинних документів і закупівлями. Допомагає навести лад у документах і поставках.',
       path: [
         ['Роздрібна мережа', 'Менеджер із закупівель: асортимент, ціноутворення, акції, переговори з постачальниками, документообіг.'],
@@ -764,7 +764,7 @@ document.querySelectorAll('.btn:not(.btn--ghost):not(.btn--sm)').forEach(b => b.
   });
 })();
 
-/* ---------- FAQ: ширина Марії від ліктя до ліктя = ширина найдовшого рядка заголовка ---------- */
+/* ---------- FAQ: ширина Олени від ліктя до ліктя = ширина найдовшого рядка заголовка ---------- */
 (() => {
   const fig = $('.faq__fig'), h2 = $('.faq__head .h2'); if (!fig || !h2) return;
   const fit = () => {
