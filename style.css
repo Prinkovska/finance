@@ -59,7 +59,7 @@ img{display:block}
 @property --w{syntax:'<percentage>';inherits:false;initial-value:0%}
 .brand__frame{--a:0deg;-webkit-mask-image:conic-gradient(#000 var(--a),transparent calc(var(--a) + .5deg));mask-image:conic-gradient(#000 var(--a),transparent calc(var(--a) + .5deg));animation:ring 1.5s .3s cubic-bezier(.5,0,.3,1) both}
 .brand__h{--w:0%;-webkit-mask-image:linear-gradient(90deg,#000 var(--w),transparent calc(var(--w) + 14%));mask-image:linear-gradient(90deg,#000 var(--w),transparent calc(var(--w) + 14%));animation:wipe 1.3s 1.5s cubic-bezier(.5,0,.3,1) both}
-.brand__word{display:block;font-family:var(--f-head);font-weight:800;font-size:17px;line-height:.98;letter-spacing:.05em;text-transform:uppercase;color:#fff;white-space:nowrap;animation:word .9s 2.5s both}
+.brand__word{display:block;font-family:var(--f-head);font-weight:800;font-size:27px;line-height:.9;letter-spacing:.04em;text-transform:uppercase;color:#fff;white-space:nowrap;animation:word .9s 2.5s both}
 @keyframes ring{from{--a:0deg}to{--a:361deg}}
 @keyframes wipe{from{--w:0%}to{--w:100%}}
 @keyframes word{from{opacity:0;transform:translateX(-8px)}}
@@ -113,7 +113,7 @@ img{display:block}
   :root{--G:80px;--ind:0px}
   .hero{--r:190px}
   .hint{top:84px;font-size:.68rem}
-  .brand__mark{width:38px;height:38px}.brand__word{font-size:14.5px}
+  .brand__mark{width:38px;height:38px}.brand__word{font-size:23px}
   .title{font-size:clamp(1.55rem,8vw,2.4rem);margin-bottom:18px}
   .lead{font-size:.95rem;margin-bottom:22px}
   .cta{flex-direction:column}.cta .btn{text-align:center}
@@ -154,7 +154,8 @@ img{display:block}
 .pain__in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start;padding-left:var(--ind)}
 .pain .eyebrow{color:#fff;opacity:.9}
 .pain .h2 em{color:#121521;background:#fff;padding:.02em .16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.pain__head{position:sticky;top:110px}
+.pain__head{position:sticky;top:110px;container-type:inline-size}
+.pain .h2{font-size:min(3rem,8.3cqi);white-space:nowrap}
 .pain__list li{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:baseline;padding:26px 0;border-top:1px solid rgba(255,255,255,.4)}
 .pain__list li:last-child{border-bottom:1px solid rgba(255,255,255,.4)}
 .pain__n{font-family:var(--f-head);font-weight:800;font-size:1.05rem;color:#121521;letter-spacing:.06em}
@@ -175,9 +176,10 @@ img{display:block}
 .svc-card:hover,.svc-card:focus-visible{transform:translateY(-6px);box-shadow:0 22px 44px -18px rgba(16,38,98,.35);border-color:rgba(251,104,53,.55)}
 .svc-card:hover::before,.svc-card:focus-visible::before{opacity:1}
 .svc-card>*{position:relative}
-.svc-card__n{position:absolute;right:20px;top:8px;font-family:var(--f-head);font-weight:800;font-size:5.2rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(16,38,98,.16);transition:-webkit-text-stroke-color .3s,transform .5s cubic-bezier(.2,.8,.2,1)}
-.svc-card:hover .svc-card__n{-webkit-text-stroke-color:var(--orange);transform:translateY(-4px)}
-.svc-card__ico{width:34px;height:34px;margin-bottom:auto;fill:none;stroke:var(--orange);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.svc-card__n{position:absolute;right:22px;top:24px;font-family:var(--f-head);font-weight:700;font-size:.8rem;line-height:1;letter-spacing:.16em;color:rgba(16,38,98,.42);-webkit-text-stroke:0;transition:color .3s}
+.svc-card:hover .svc-card__n{color:var(--orange)}
+.svc-card__ico{width:52px;height:52px;padding:12px;margin-bottom:auto;box-sizing:border-box;border-radius:14px;background:rgba(251,104,53,.12);fill:none;stroke:var(--orange);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:background .3s,stroke .3s}
+.svc-card:hover .svc-card__ico{background:var(--orange);stroke:#fff}
 .svc-card h3{font-family:var(--f-head);font-weight:700;font-size:1.12rem;line-height:1.3;margin:34px 0 10px}
 .svc-card p{font-size:.97rem;line-height:1.55;opacity:.72}
 
@@ -456,7 +458,7 @@ body.lock{overflow:hidden}
 .svc-card{background:rgba(255,255,255,.46);border:1px solid rgba(255,255,255,.8);backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 24px 44px -28px rgba(16,38,98,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s,background .35s,backdrop-filter .5s,-webkit-backdrop-filter .5s}
 .svc-card:hover,.svc-card:focus-visible{background:rgba(255,255,255,.34);backdrop-filter:blur(4px) saturate(140%);-webkit-backdrop-filter:blur(4px) saturate(140%);border-color:rgba(251,104,53,.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 28px 50px -24px rgba(16,38,98,.5)}
 .svc-card p{opacity:.85}
-.svc-card__n{-webkit-text-stroke:1.5px rgba(16,38,98,.28)}
+.svc-card__n{-webkit-text-stroke:0}
 .svc-card:hover h3,.svc-card:hover p{text-shadow:0 0 14px rgba(255,255,255,.9)}
 
 /* ===== раунд 6: «Що входить у супровід» — список + картка деталей ===== */
@@ -608,7 +610,7 @@ body.lock{overflow:hidden}
 
 /* вузькі екрани: колонки не розпирає довге слово */
 @media (max-width:1000px){.pain__in,.flow__in,.svc__head,.game__in,.quiz__in,.mani__in,.scope{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:640px){.pain .h2{font-size:clamp(1.45rem,7.4vw,2rem)}}
+@media (max-width:1000px){.pain .h2{font-size:min(3rem,calc((100vw - 40px) / 12))}}
 
 /* ===== раунд 14: фото рівно по низу блоку, пункти нижче, бліки й анімації ===== */
 .mani__fig{margin-bottom:calc(-1 * var(--mpb) - 8px);clip-path:inset(-80px -80px 8px -80px)}   /* прозорий край PNG ховаємо, світіння не виходить на наступний блок */
@@ -1192,11 +1194,11 @@ section[id],footer[id]{scroll-margin-top:calc(var(--hh) - 10px)}
 /* ---------- Телефон: компактні картки «Послуг» і Марія над панеллю ---------- */
 @media (max-width:640px){
   .svc__grid{gap:10px}
-  .svc .svc-card{display:grid;grid-template-columns:30px 1fr;column-gap:14px;align-items:start;min-height:0;padding:16px 16px 18px}
-  .svc .svc-card .svc-card__ico{grid-row:1/3;width:26px;height:26px;margin:2px 0 0}
+  .svc .svc-card{display:grid;grid-template-columns:40px 1fr;column-gap:14px;align-items:start;min-height:0;padding:16px 16px 18px}
+  .svc .svc-card .svc-card__ico{grid-row:1/3;width:40px;height:40px;padding:9px;border-radius:11px;margin:0}
   .svc .svc-card h3{font-size:.95rem;margin:0 0 6px;padding-right:48px}
   .svc .svc-card p{font-size:.86rem;line-height:1.42}
-  .svc .svc-card__n{font-size:2.4rem;right:12px;top:8px}
+  .svc .svc-card__n{font-size:.72rem;right:14px;top:16px}
 }
 @media (max-width:900px){
   .scope.has-fig{margin-top:clamp(150px,34vw,230px)}
